@@ -11,8 +11,8 @@ namespace asap {
       datetime() noexcept;
       explicit datetime(time_t time) noexcept;
       datetime(const std::string & datetime, const std::string & format);
-      //datetime & operator+=(const duration & duration);
-      //datetime & operator-=(const duration & duration);
+      datetime & operator+=(const duration & duration);
+      datetime & operator-=(const duration & duration);
 
       time_t timestamp() const;
       std::string str(const std::string & fmt = "%c") const;
@@ -23,5 +23,6 @@ namespace asap {
 }
 
 #include "datetime.tcc"
+#include "operators.h"
 
 #endif // ASAP_DATETIME_H

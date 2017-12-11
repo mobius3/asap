@@ -40,6 +40,11 @@ namespace asap {
   inline bool operator==(const datetime & a, const datetime & b) {
     return a.timestamp() == b.timestamp();
   }
+
+  template<typename ostream>
+  inline ostream & operator<<(ostream & os, const asap::datetime & dt) {
+    return os << dt.str(), os;
+  }
 }
 
 #endif //ASAP_OPERATORS_H

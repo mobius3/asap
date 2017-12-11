@@ -3,6 +3,6 @@
 
 int main(int argc, char * argv[]) {
   asap::datetime x;
-  std::cout << x.str() << std::endl;
+  std::cout << x << std::endl;
   return 0;
 }
