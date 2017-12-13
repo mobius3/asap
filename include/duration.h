@@ -9,14 +9,14 @@ namespace asap {
       duration(unsigned int seconds);
       duration & operator+=(const duration & other);
       duration & operator-=(const duration & other);
-      std::string format(const std::string & fmt);
 
-      unsigned years() const;
-      unsigned months() const;
-      unsigned days() const;
-      unsigned minutes() const;
-      unsigned seconds() const;
+      std::string str(const std::string & fmt) const;
+
+    private:
+      unsigned seconds_;
   };
 }
+
+#include "duration.tcc"
 
 #endif //ASAP_DURATION_H
