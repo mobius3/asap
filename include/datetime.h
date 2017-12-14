@@ -13,6 +13,7 @@ namespace asap {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
       datetime(const std::string & datetime, const std::string & format);
+      explicit datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours = 0, uint32_t minutes = 0, uint32_t seconds = 0);
       datetime & operator+=(const duration & duration);
       datetime & operator-=(const duration & duration);
       datetime & operator+=(time_t stamp);
@@ -71,6 +72,17 @@ namespace asap {
     std::time_t time = std::mktime(&when);
     time += seconds;
     when = *(std::localtime(&time));
+  }
+
+  datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours, uint32_t minutes, uint32_t seconds)
+      : datetime() {
+    when.tm_year = year - 1900;
+    when.tm_mon = month;
+    when.tm_mday = day;
+    when.tm_hour = hours;
+    when.tm_min = minutes;
+    when.tm_sec = seconds;
+    mktime(&when);
   }
 }
 
