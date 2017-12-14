@@ -12,6 +12,8 @@ namespace asap {
 
       std::string str() const;
 
+      uint64_t seconds() const { return seconds_; }
+
     private:
       uint64_t seconds_;
   };

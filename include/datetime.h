@@ -6,19 +6,23 @@
 #include <iomanip>
 #include <sstream>
 
+#include "duration.h"
+
 namespace asap {
-  class duration;
   class datetime {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
       datetime(const std::string & datetime, const std::string & format);
       datetime & operator+=(const duration & duration);
       datetime & operator-=(const duration & duration);
+      datetime & operator+=(time_t stamp);
+      datetime & operator-=(time_t stamp);
 
       time_t timestamp() const;
       std::string str(const std::string & fmt = "%c") const;
 
     private:
+      void add(long seconds);
       std::tm when;
   };
 
@@ -41,6 +45,32 @@ namespace asap {
     char data[256];
     std::strftime(data, sizeof(data), fmt.c_str(), &when);
     return std::string(data);
+  }
+
+  datetime & datetime::operator+=(const duration & duration) {
+    add(duration.seconds());
+    return *this;
+  }
+
+  datetime & datetime::operator-=(const duration & duration) {
+    add(-duration.seconds());
+    return *this;
+  }
+
+  datetime & datetime::operator+=(time_t stamp) {
+    add(static_cast<long>(stamp));
+    return *this;
+  }
+
+  datetime & datetime::operator-=(time_t stamp) {
+    add(-static_cast<long>(stamp));
+    return *this;
+  }
+
+  void datetime::add(long seconds) {
+    std::time_t time = std::mktime(&when);
+    time += seconds;
+    when = *(std::localtime(&time));
   }
 }
 
