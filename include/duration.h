@@ -2,6 +2,7 @@
 #define ASAP_DURATION_H
 
 #include <string>
+#include <cmath>
 #include "constants.h"
 
 namespace asap {
@@ -25,11 +26,11 @@ namespace asap {
 
 
   duration & duration::operator+=(const duration & other) {
-    return operator-=(other.seconds());
+    return operator+=(other.seconds());
   }
 
   duration & duration::operator-=(const duration & other) {
-    return operator+=(other.seconds());
+    return operator-=(other.seconds());
   }
 
   duration & duration::operator+=(long other) {
