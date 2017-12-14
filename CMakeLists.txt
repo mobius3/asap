@@ -63,8 +63,6 @@ endif()
 # This library is a convenience library to force files appear in the IDE properly.
 add_library(asap-dummy
   include/datetime.h
-  include/datetime.tcc
   include/duration.h
-  include/operators.h
-  include/duration.tcc)
+  include/operators.h)
 set_target_properties(asap-dummy PROPERTIES LINKER_LANGUAGE CXX EXCLUDE_FROM_ALL TRUE)
