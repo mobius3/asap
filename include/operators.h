@@ -17,6 +17,18 @@ namespace asap {
     return r;
   }
 
+  inline datetime operator+(const datetime & a, std::time_t b) {
+    datetime r = a;
+    r += b;
+    return r;
+  }
+
+  inline datetime operator-(const datetime & a, std::time_t b) {
+    datetime r = a;
+    r -= b;
+    return r;
+  }
+
   inline duration operator+(const duration & a, const duration & b) {
     duration r = a;
     r += b;
