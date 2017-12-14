@@ -16,10 +16,21 @@ namespace asap {
 
       std::string str() const;
 
+
+      float years() const { return transform(SECONDS_IN_YEAR); }
+      float months() const { return transform(SECONDS_IN_MONTH); }
+      float weeks() const { return transform(SECONDS_IN_WEEK); }
+      float days() const { return transform(SECONDS_IN_DAY); }
+      float hours() const { return transform(SECONDS_IN_HOUR); }
+      float minutes() const { return transform(SECONDS_IN_MINUTE); }
       uint64_t seconds() const { return seconds_; }
+      uint64_t milliseconds() const { return seconds_ * 1000; }
 
     private:
       uint64_t seconds_;
+      float transform(uint64_t count) const {
+        return static_cast<float>(seconds_) / count;
+      }
   };
 
   duration::duration(uint64_t seconds) : seconds_(seconds) { }
