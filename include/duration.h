@@ -7,8 +7,7 @@
 
 namespace asap {
   namespace detail {
-    inline static unsigned long long
-    append(std::string & str, uint64_t seconds, uint64_t count, const std::string & singular,
+    inline static uint64_t append(std::string & str, uint64_t seconds, uint64_t count, const std::string & singular,
            const std::string & plural = "") {
       long r = static_cast<unsigned>(seconds) / count;
       if (!r) return seconds;
