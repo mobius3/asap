@@ -2,6 +2,7 @@
 #define ASAP_DURATION_H
 
 #include <string>
+#include "constants.h"
 
 namespace asap {
   class duration {
@@ -54,22 +55,16 @@ namespace asap {
   }
 
   std::string duration::str() const {
-    static constexpr uint64_t YEAR = (60 * 60 * 24 * 365);
-    static constexpr uint64_t MONTH = (60 * 60 * 24 * 365/12);
-    static constexpr uint64_t WEEK = (60 * 60 * 24 * 365/12/4);
-    static constexpr uint64_t DAY = (60 * 60 * 24);
-    static constexpr uint64_t HOUR = (60 * 60);
-    static constexpr uint64_t MINUTE = (60);
     uint64_t seconds = seconds_;
     std::string str; str.reserve(100);
 
     // TODO: l10n i18n?
-    seconds = append(str, seconds, YEAR, "year");
-    seconds = append(str, seconds, MONTH, "month");
-    seconds = append(str, seconds, WEEK, "week");
-    seconds = append(str, seconds, DAY, "day");
-    seconds = append(str, seconds, HOUR, "hour");
-    seconds = append(str, seconds, MINUTE, "minute");
+    seconds = append(str, seconds, SECONDS_IN_YEAR, "year");
+    seconds = append(str, seconds, SECONDS_IN_MONTH, "month");
+    seconds = append(str, seconds, SECONDS_IN_WEEK, "week");
+    seconds = append(str, seconds, SECONDS_IN_DAY, "day");
+    seconds = append(str, seconds, SECONDS_IN_HOUR, "hour");
+    seconds = append(str, seconds, SECONDS_IN_MINUTE, "minute");
     append(str, seconds, 1, "second");
 
     return str;
