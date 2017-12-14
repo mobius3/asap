@@ -41,6 +41,18 @@ namespace asap {
     return r;
   }
 
+  inline duration operator+(const duration & a, long b) {
+    duration r = a;
+    r += b;
+    return r;
+  }
+
+  inline duration operator-(const duration & a, long b) {
+    duration r = a;
+    r -= b;
+    return r;
+  }
+
   inline bool operator<(const datetime & a, const datetime & b) {
     return a.timestamp() < b.timestamp();
   }

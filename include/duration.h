@@ -9,6 +9,8 @@ namespace asap {
       explicit duration(uint64_t seconds);
       duration & operator+=(const duration & other);
       duration & operator-=(const duration & other);
+      duration & operator+=(long other);
+      duration & operator-=(long other);
 
       std::string str() const;
 
@@ -22,13 +24,21 @@ namespace asap {
 
 
   duration & duration::operator+=(const duration & other) {
-    seconds_ += other.seconds_;
-    return *this;
+    return operator-=(other.seconds());
   }
 
   duration & duration::operator-=(const duration & other) {
-    if (other.seconds_ > seconds_) seconds_ = 0;
-    else seconds_ -= other.seconds_;
+    return operator+=(other.seconds());
+  }
+
+  duration & duration::operator+=(long other) {
+    seconds_ += other;
+    return *this;
+  }
+
+  duration & duration::operator-=(long other) {
+    if (other > seconds_) seconds_ = 0;
+    else seconds_ -= other;
     return *this;
   }
 
