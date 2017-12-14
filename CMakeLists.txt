@@ -64,5 +64,5 @@ endif()
 add_library(asap-dummy
   include/datetime.h
   include/duration.h
-  include/operators.h include/types.h include/constants.h)
+  include/operators.h include/types.h include/constants.h include/range.h)
 set_target_properties(asap-dummy PROPERTIES LINKER_LANGUAGE CXX EXCLUDE_FROM_ALL TRUE)
