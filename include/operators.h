@@ -42,8 +42,13 @@ namespace asap {
   }
 
   template<typename ostream>
-  inline ostream & operator<<(ostream & os, const asap::datetime & dt) {
+  inline ostream & operator<<(ostream & os, const datetime & dt) {
     return os << dt.str(), os;
+  }
+
+  template<typename ostream>
+  inline ostream & operator<<(ostream & os, const duration & du) {
+    return os << du.str(), os;
   }
 }
 

@@ -18,22 +18,37 @@ namespace asap {
     return *this;
   }
 
-  std::string duration::str(const std::string & fmt) const {
-    unsigned long iyears = fmt.find("{years}");
-    unsigned long imonths = fmt.find("{months}");
-    unsigned long iweeks = fmt.find("{weeks}");
-    unsigned long idays = fmt.find("{days}");
-    unsigned long ihours = fmt.find("{hours}");
-    unsigned long iminutes = fmt.find("{months}");
-    unsigned long iseconds = fmt.find("{seconds}");
-    unsigned long long y, mon, w, d, h, min, s;
-    time_t current = seconds_;
+  static unsigned long long append(std::string & str, uint64_t seconds, uint64_t count, const std::string & singular,
+                                   const std::string & plural = "") {
+    long r = static_cast<unsigned>(seconds) / count;
+    if (!r) return seconds;
+    if (!str.empty()) str += ", ";
+    str += std::to_string(r) + " ";
+    if (r < 2) str += singular;
+    else str += plural.empty() ? singular + 's' : plural;
+    return static_cast<unsigned>(seconds) % count;
+  }
 
-    if (iyears) {
-      //             se   mi   hr   day
-      y = static_cast<unsigned>(current) / (60 * 60 * 24 * 365);
-      current -= y;
-    }
+  std::string duration::str() const {
+    static constexpr uint64_t YEAR = (60 * 60 * 24 * 365);
+    static constexpr uint64_t MONTH = (60 * 60 * 24 * 365/12);
+    static constexpr uint64_t WEEK = (60 * 60 * 24 * 365/12/4);
+    static constexpr uint64_t DAY = (60 * 60 * 24);
+    static constexpr uint64_t HOUR = (60 * 60);
+    static constexpr uint64_t MINUTE = (60);
+    uint64_t seconds = seconds_;
+    std::string str = "";
+
+    // TODO: l10n i18n?
+    seconds = append(str, seconds, YEAR, "year");
+    seconds = append(str, seconds, MONTH, "month");
+    seconds = append(str, seconds, WEEK, "week");
+    seconds = append(str, seconds, DAY, "day");
+    seconds = append(str, seconds, HOUR, "hour");
+    seconds = append(str, seconds, MINUTE, "minute");
+    append(str, seconds, 1, "second");
+
+    return str;
   }
 }
 

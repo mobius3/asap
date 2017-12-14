@@ -10,7 +10,7 @@ namespace asap {
       duration & operator+=(const duration & other);
       duration & operator-=(const duration & other);
 
-      std::string str(const std::string & fmt) const;
+      std::string str() const;
 
     private:
       unsigned seconds_;
