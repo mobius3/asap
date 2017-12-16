@@ -5,7 +5,7 @@
 #include "types.h"
 
 namespace asap {
-  class range;
+  class period;
 
   namespace detail {
     class accessor {
@@ -50,7 +50,7 @@ namespace asap {
         }
 
       private:
-        accessor(const asap::range & range, asap::duration step)
+        accessor(const asap::period & range, asap::duration step)
             : range(range)
             , step(step) { }
 
@@ -58,17 +58,17 @@ namespace asap {
         const asap::datetime & to() const;
 
       private:
-        const asap::range & range;
+        const asap::period & range;
         asap::duration step;
 
         friend class accessor::iterator;
-        friend class asap::range;
+        friend class asap::period;
     };
   }
 
-  class range {
+  class period {
     public:
-      explicit range(const asap::datetime & a = asap::datetime(), const asap::datetime & b = asap::datetime());
+      explicit period(const asap::datetime & a = asap::datetime(), const asap::datetime & b = asap::datetime());
       const asap::datetime & from() const { return begin_; }
       void from(const asap::datetime & begin) { begin_ = begin; }
 
@@ -87,14 +87,14 @@ namespace asap {
   const asap::datetime & detail::accessor::from() const { return range.from(); }
   const asap::datetime & detail::accessor::to() const { return range.to(); }
 
-  range::range(const datetime & a, const datetime & b)
+  period::period(const datetime & a, const datetime & b)
       : begin_(a)
       , end_(b)
   {
 
   }
 
-  asap::detail::accessor range::each(const asap::duration & d) const {
+  asap::detail::accessor period::each(const asap::duration & d) const {
     return {*this, d};
   }
 }
