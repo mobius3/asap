@@ -41,13 +41,13 @@ add_library(asap INTERFACE)
 
 # Set up include directories
 target_include_directories(asap INTERFACE
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/asap>
   $<INSTALL_INTERFACE:include/asap>
   )
 
 # Set up install
 install(TARGETS asap EXPORT asap-targets)
-install(DIRECTORY include/ DESTINATION include/asap)
+install(DIRECTORY include/ DESTINATION include/)
 
 # Set up export and config
 include(cmake/setup-exports.cmake)
@@ -62,10 +62,10 @@ endif()
 
 # This library is a convenience library to force files appear in the IDE properly.
 add_library(asap-dummy
-  include/datetime.h
-  include/duration.h
-  include/operators.h
-  include/constants.h
-  include/period.h
-  include/asap.h)
+  include/asap/datetime.h
+  include/asap/duration.h
+  include/asap/operators.h
+  include/asap/constants.h
+  include/asap/period.h
+  include/asap/asap.h)
 set_target_properties(asap-dummy PROPERTIES LINKER_LANGUAGE CXX EXCLUDE_FROM_ALL TRUE)
