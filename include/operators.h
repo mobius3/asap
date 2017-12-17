@@ -39,6 +39,13 @@ namespace asap {
     return r;
   };
 
+  template<uint64_t conv>
+  inline static duration<conv> operator+(const duration<conv> & a, const duration<conv> & b) {
+    duration<conv> r = a;
+    r += b;
+    return r;
+  };
+
   template<uint64_t c1, uint64_t c2>
   inline static duration<c1> operator-(const duration<c1> & a, const duration<c2> & b) {
     duration<c1> r = a;

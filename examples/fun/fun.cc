@@ -17,5 +17,7 @@ int main(int argc, char * argv[]) {
     std::cout << "got: " << dt << std::endl;
   }
 
+  std::cout << asap::year(0.5) << std::endl;
+
   return 0;
 }

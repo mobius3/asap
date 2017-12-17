@@ -40,6 +40,11 @@ namespace asap {
             return *this;
         }
 
+        duration<convert> & operator+=(const duration<convert> & other) {
+          value = (value + *other);
+          return *this;
+        }
+
         template<int convert2>
         duration<convert> & operator-=(const duration<convert2> & other) {
             value = ((value * convert) - (*other * convert2)) / convert;
