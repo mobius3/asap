@@ -6,18 +6,9 @@
 #include <iostream>
 
 int main(int argc, char * argv[]) {
-
-
-  asap::datetime x;
-  asap::datetime y = x + asap::years(1.5) + asap::months(2);
-
-  asap::period period(x, y);
-
-  for (asap::datetime dt : period.every(asap::month(1))) {
-    std::cout << "got: " << dt << std::endl;
+  asap::datetime x, y = x + asap::months(4);
+  for (auto dt : asap::period(x, y).every(asap::weeks(1))) {
+    std::cout << dt << std::endl;
   }
-
-  std::cout << asap::year(0.5) << std::endl;
-
   return 0;
 }

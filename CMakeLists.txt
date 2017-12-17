@@ -66,5 +66,6 @@ add_library(asap-dummy
   include/duration.h
   include/operators.h
   include/constants.h
-  include/period.h)
+  include/period.h
+  include/asap.h)
 set_target_properties(asap-dummy PROPERTIES LINKER_LANGUAGE CXX EXCLUDE_FROM_ALL TRUE)
