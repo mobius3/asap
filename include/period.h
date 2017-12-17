@@ -2,24 +2,28 @@
 #define ASAP_RANGE_H
 
 #include "datetime.h"
-#include "types.h"
+#include "operators.h"
 
 namespace asap {
   class period;
 
   namespace detail {
+    template<uint64_t stepconv>
     class accessor {
+      private:
+        using step_t = asap::duration<stepconv>;
+
       public:
         struct iterator {
           asap::datetime now;
           asap::datetime begin;
           asap::datetime end;
-          asap::duration step;
+          step_t step;
 
           iterator( const asap::datetime & now,
                     const asap::datetime & begin,
                     const asap::datetime & end,
-                    const asap::duration & step)
+                    const step_t & step)
               : now(now), begin(begin), end(end), step(step) { }
 
           const asap::datetime & operator++() {
@@ -50,7 +54,7 @@ namespace asap {
         }
 
       private:
-        accessor(const asap::period & range, asap::duration step)
+        accessor(const asap::period & range, step_t step)
             : range(range)
             , step(step) { }
 
@@ -59,7 +63,7 @@ namespace asap {
 
       private:
         const asap::period & range;
-        asap::duration step;
+        step_t step;
 
         friend class accessor::iterator;
         friend class asap::period;
@@ -77,15 +81,19 @@ namespace asap {
 
       //asap::duration difference() const { return end_ - begin_; }
 
-      asap::detail::accessor each(const asap::duration & d) const;
+      template<uint64_t stepconv>
+      asap::detail::accessor<stepconv> every(const asap::duration<stepconv> & d) const;
 
     private:
       asap::datetime begin_;
       asap::datetime end_;
   };
 
-  const asap::datetime & detail::accessor::from() const { return range.from(); }
-  const asap::datetime & detail::accessor::to() const { return range.to(); }
+  template<uint64_t stepconv>
+  const asap::datetime & detail::accessor<stepconv>::from() const { return range.from(); }
+
+  template<uint64_t stepconv>
+  const asap::datetime & detail::accessor<stepconv>::to() const { return range.to(); }
 
   period::period(const datetime & a, const datetime & b)
       : begin_(a)
@@ -94,7 +102,8 @@ namespace asap {
 
   }
 
-  asap::detail::accessor period::each(const asap::duration & d) const {
+  template<uint64_t stepconv>
+  asap::detail::accessor<stepconv> period::every(const asap::duration<stepconv> & d) const {
     return {*this, d};
   }
 }

@@ -2,88 +2,85 @@
 #define ASAP_DURATION_H
 
 #include <string>
+#include <type_traits>
 #include <cmath>
 #include "constants.h"
 
 namespace asap {
   namespace detail {
-    inline static uint64_t append(std::string & str, uint64_t seconds, uint64_t count, const std::string & singular,
-           const std::string & plural = "") {
-      long r = static_cast<unsigned>(seconds) / count;
-      if (!r) return seconds;
-      if (!str.empty()) str += ", ";
-      str += std::to_string(r) + " ";
-      if (r < 2) str += singular;
-      else str += plural.empty() ? singular + 's' : plural;
-      return static_cast<unsigned>(seconds) % count;
+    inline static int append(std::string & str, int seconds, int count, const std::string & singular,
+                                  const std::string & plural = "") {
+        long r = static_cast<unsigned>(seconds) / count;
+        if (!r) return seconds;
+        if (!str.empty() && str[str.length() -1] != '-') str += ", ";
+        str += std::to_string(r) + " ";
+        if (r < 2) str += singular;
+        else str += plural.empty() ? singular + 's' : plural;
+        return static_cast<unsigned>(seconds) % count;
     }
   }
 
-  class duration {
-    public:
-      explicit duration(uint64_t seconds);
-      duration & operator+=(const duration & other);
-      duration & operator-=(const duration & other);
-      duration & operator+=(long other);
-      duration & operator-=(long other);
+  template<uint64_t convert = 1>
+    class duration {
+      public:
+        explicit duration(double v = 0) : value(v) { }
+        explicit operator double() const { return value; }
+        duration<convert> & operator=(int v) { value = v; return *this; }
+        double operator*() const { return value; };
 
-      std::string str() const;
+        template<int other>
+        explicit operator duration<other>() const {
+            double asseconds = value * convert;
+            return duration<other>(asseconds / other);
+        }
 
-      float years() const { return transform(SECONDS_IN_YEAR); }
-      float months() const { return transform(SECONDS_IN_MONTH); }
-      float weeks() const { return transform(SECONDS_IN_WEEK); }
-      float days() const { return transform(SECONDS_IN_DAY); }
-      float hours() const { return transform(SECONDS_IN_HOUR); }
-      float minutes() const { return transform(SECONDS_IN_MINUTE); }
-      uint64_t seconds() const { return seconds_; }
-      uint64_t milliseconds() const { return seconds_ * 1000; }
+        template<int convert2>
+        duration<convert> & operator+=(const duration<convert2> & other) {
+            value = ((value * convert) + (*other * convert2)) / convert;
+            return *this;
+        }
 
-    private:
-      uint64_t seconds_;
-      float transform(uint64_t count) const {
-        return static_cast<float>(seconds_) / count;
-      }
-  };
+        template<int convert2>
+        duration<convert> & operator-=(const duration<convert2> & other) {
+            value = ((value * convert) - (*other * convert2)) / convert;
+            return *this;
+        }
 
-  inline duration::duration(uint64_t seconds)
-      : seconds_(seconds) { }
+        template<int convert2>
+        duration<convert> & operator=(const duration<convert2> & other) {
+            value = (*other * convert2) / convert;
+            return *this;
+        }
 
+        std::string str() const {
+          auto seconds = static_cast<int>(std::fabs(value) * convert);
+          std::string str;
+          if (value < 0) str = "-";
+          str.reserve(100);
 
-  inline duration & duration::operator+=(const duration & other) {
-    return operator+=(other.seconds());
-  }
+          // TODO: l10n i18n?
+          seconds = detail::append(str, seconds, SECONDS_IN_YEAR, "year");
+          seconds = detail::append(str, seconds, SECONDS_IN_MONTH, "month");
+          seconds = detail::append(str, seconds, SECONDS_IN_WEEK, "week");
+          seconds = detail::append(str, seconds, SECONDS_IN_DAY, "day");
+          seconds = detail::append(str, seconds, SECONDS_IN_HOUR, "hour");
+          seconds = detail::append(str, seconds, SECONDS_IN_MINUTE, "minute");
+          detail::append(str, seconds, 1, "second");
 
-  inline duration & duration::operator-=(const duration & other) {
-    return operator-=(other.seconds());
-  }
+          return str;
+        }
 
-  inline duration & duration::operator+=(long other) {
-    seconds_ += other;
-    return *this;
-  }
+      private:
+        double value;
+    };
 
-  inline duration & duration::operator-=(long other) {
-    if (other > seconds_) seconds_ = 0;
-    else seconds_ -= other;
-    return *this;
-  }
-
-  std::string duration::str() const {
-    uint64_t seconds = seconds_;
-    std::string str;
-    str.reserve(100);
-
-    // TODO: l10n i18n?
-    seconds = detail::append(str, seconds, SECONDS_IN_YEAR, "year");
-    seconds = detail::append(str, seconds, SECONDS_IN_MONTH, "month");
-    seconds = detail::append(str, seconds, SECONDS_IN_WEEK, "week");
-    seconds = detail::append(str, seconds, SECONDS_IN_DAY, "day");
-    seconds = detail::append(str, seconds, SECONDS_IN_HOUR, "hour");
-    seconds = detail::append(str, seconds, SECONDS_IN_MINUTE, "minute");
-    detail::append(str, seconds, 1, "second");
-
-    return str;
-  }
+  using seconds = duration<1>; using second = seconds;
+  using minutes = duration<SECONDS_IN_MINUTE>; using minute = minutes;
+  using hours = duration<SECONDS_IN_HOUR>; using hour = hours;
+  using days = duration<SECONDS_IN_DAY>; using day = days;
+  using weeks = duration<SECONDS_IN_WEEK>; using week = weeks;
+  using months = duration<SECONDS_IN_MONTH>; using month = months;
+  using years = duration<SECONDS_IN_YEAR>; using year = years;
 }
 
-#endif //ASAP_DURATION_H
+#endif

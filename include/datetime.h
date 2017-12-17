@@ -5,6 +5,7 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <cmath>
 
 #include "duration.h"
 
@@ -14,8 +15,21 @@ namespace asap {
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
       datetime(const std::string & datetime, const std::string & format);
       datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours = 0, uint32_t minutes = 0, uint32_t seconds = 0);
-      datetime & operator+=(const duration & duration);
-      datetime & operator-=(const duration & duration);
+
+      datetime & operator+=(const seconds & d);
+      datetime & operator+=(const minutes & d);
+      datetime & operator+=(const hours & d);
+      datetime & operator+=(const days & d);
+      datetime & operator+=(const weeks & d);
+      datetime & operator+=(const months & d);
+      datetime & operator+=(const years & d);
+
+      template<int convert>
+      datetime & operator-=(const duration<convert> & c) {
+        return *this += -c;
+      }
+
+      //datetime & operator-=(const duration & duration);
       datetime & operator+=(time_t stamp);
       datetime & operator-=(time_t stamp);
 
@@ -48,16 +62,6 @@ namespace asap {
     return std::string(data);
   }
 
-  datetime & datetime::operator+=(const duration & duration) {
-    add(duration.seconds());
-    return *this;
-  }
-
-  datetime & datetime::operator-=(const duration & duration) {
-    add(-duration.seconds());
-    return *this;
-  }
-
   datetime & datetime::operator+=(time_t stamp) {
     add(static_cast<long>(stamp));
     return *this;
@@ -84,8 +88,41 @@ namespace asap {
     when.tm_sec = seconds;
     mktime(&when);
   }
-}
 
-#include "operators.h"
+  datetime & datetime::operator+=(const seconds & d) {
+    when.tm_sec += *d;
+    mktime(&when);
+    return *this;
+  }
+
+  datetime & datetime::operator+=(const minutes & d) {
+    when.tm_min += *d;
+    return *this += asap::seconds((*d - std::floor(*d)) * SECONDS_IN_MINUTE);
+  }
+
+  datetime & datetime::operator+=(const hours & d) {
+    when.tm_hour += *d;
+    return *this += asap::minutes((*d - std::floor(*d)) * (SECONDS_IN_HOUR / SECONDS_IN_MINUTE));
+  }
+
+  datetime & datetime::operator+=(const days & d) {
+    when.tm_mday += *d;
+    return *this += asap::hours((*d - std::floor(*d)) * (SECONDS_IN_DAY / SECONDS_IN_HOUR));
+  }
+
+  datetime & datetime::operator+=(const weeks & d) {
+    return *this += asap::days(*d * 7);
+  }
+
+  datetime & datetime::operator+=(const months & d) {
+    when.tm_mon += *d;
+    return *this += asap::days((*d - std::floor(*d)) * (SECONDS_IN_MONTH / SECONDS_IN_DAY));
+  }
+
+  datetime & datetime::operator+=(const years & d) {
+    when.tm_year += *d;
+    return *this += asap::months((*d - std::floor(*d)) * (SECONDS_IN_YEAR / SECONDS_IN_MONTH));
+  }
+}
 
 #endif // ASAP_DATETIME_H
