@@ -13,7 +13,7 @@ namespace asap {
   class datetime {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
-      datetime(const std::string & datetime, const std::string & format);
+      explicit datetime(const std::string & datetime, std::string format = "");
       datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours = 0, uint32_t minutes = 0, uint32_t seconds = 0);
 
       datetime & operator+=(const seconds & d);
@@ -46,9 +46,28 @@ namespace asap {
     when = *(std::localtime(&time));
   }
 
-  inline datetime::datetime(const std::string & datetime, const std::string & format) : when{} {
-    std::istringstream ss(datetime);
+  inline datetime::datetime(const std::string & datetime, std::string format) : when{} {
+    std::stringstream ss;
+
+    static std::array<std::string, 10> fmts = {
+      "%Y-%m-%d %H:%M:%S",
+      "%m/%d/%Y %H:%M:%S",
+    };
+    if (format.empty()) format = fmts[0];
+
+    do {
+      ;
+      ss << datetime;
+      ss >> std::get_time(&when, format.c_str());
+      format = *(fmts++)
+    } while(ss.fail() || ss.bad());
+
+    format = "%Y-%m-%d %H:%M:%S";
+    ss << datetime;
     ss >> std::get_time(&when, format.c_str());
+    if (ss.good()) return;
+
+    std::cout << "gfb: " << ss.good() << ss.fail() << ss.bad() << std::endl;
   }
 
   inline time_t datetime::timestamp() const {
