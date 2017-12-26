@@ -6,4 +6,8 @@
 #include "period.h"
 #include "operators.h"
 
+namespace asap {
+  static inline asap::datetime now() { return datetime{}; }
+}
+
 #endif //ASAP_H

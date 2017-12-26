@@ -46,11 +46,13 @@ namespace asap {
   }
 
   inline datetime::datetime(const std::string & datetime, const std::string & format, const std::string & locale) : when{} {
-    static std::array<std::string, 5> fmts = {
+    static std::array<std::string, 8> fmts = {
       format,
       "%x %X",
       "%Y-%m-%dT%H:%M:%S",
-      "%m/%d/%Y %H:%M:%S",
+      "%d/%m/%Y %H:%M:%S",
+      "%H:%M:%S",
+      "%d/%m/%Y",
       "%c"
     };
 
@@ -98,7 +100,6 @@ namespace asap {
     when.tm_hour = hours;
     when.tm_min = minutes;
     when.tm_sec = seconds;
-    mktime(&when);
   }
 
   datetime & datetime::operator+=(const seconds & d) {
