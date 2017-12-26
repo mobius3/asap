@@ -13,7 +13,7 @@ namespace asap {
   class datetime {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
-      explicit datetime(const std::string & datetime, std::string format = "");
+      explicit datetime(const std::string & datetime, const std::string & format = "%x %X", const std::string & locale = "");
       datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours = 0, uint32_t minutes = 0, uint32_t seconds = 0);
 
       datetime & operator+=(const seconds & d);
@@ -29,12 +29,11 @@ namespace asap {
         return *this += -c;
       }
 
-      //datetime & operator-=(const duration & duration);
       datetime & operator+=(time_t stamp);
       datetime & operator-=(time_t stamp);
 
       time_t timestamp() const;
-      std::string str(const std::string & fmt = "%c") const;
+      std::string str(const std::string & fmt = "%x %X") const;
 
     private:
       void add(long seconds);
@@ -46,28 +45,22 @@ namespace asap {
     when = *(std::localtime(&time));
   }
 
-  inline datetime::datetime(const std::string & datetime, std::string format) : when{} {
-    std::stringstream ss;
-
-    static std::array<std::string, 10> fmts = {
-      "%Y-%m-%d %H:%M:%S",
+  inline datetime::datetime(const std::string & datetime, const std::string & format, const std::string & locale) : when{} {
+    static std::array<std::string, 5> fmts = {
+      format,
+      "%x %X",
+      "%Y-%m-%dT%H:%M:%S",
       "%m/%d/%Y %H:%M:%S",
+      "%c"
     };
-    if (format.empty()) format = fmts[0];
 
-    do {
-      ;
-      ss << datetime;
-      ss >> std::get_time(&when, format.c_str());
-      format = *(fmts++)
-    } while(ss.fail() || ss.bad());
-
-    format = "%Y-%m-%d %H:%M:%S";
-    ss << datetime;
-    ss >> std::get_time(&when, format.c_str());
-    if (ss.good()) return;
-
-    std::cout << "gfb: " << ss.good() << ss.fail() << ss.bad() << std::endl;
+    for (std::string & fmt : fmts) {
+      when = {0};
+      std::stringstream ss(datetime);
+      ss.imbue(std::locale(""));
+      ss >> std::get_time(&when, fmt.c_str());
+      if (str(fmt) == datetime) break;
+    }
   }
 
   inline time_t datetime::timestamp() const {
