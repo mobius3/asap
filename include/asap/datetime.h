@@ -23,6 +23,7 @@ namespace asap {
       datetime & operator+=(const weeks & d);
       datetime & operator+=(const months & d);
       datetime & operator+=(const years & d);
+      asap::seconds operator-(const datetime & other) const;
 
       template<int convert>
       datetime & operator-=(const duration<convert> & c) {
@@ -93,7 +94,7 @@ namespace asap {
   }
 
   datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours, uint32_t minutes, uint32_t seconds)
-      : datetime() {
+    : datetime() {
     when.tm_year = year - 1900;
     when.tm_mon = month;
     when.tm_mday = day;
@@ -106,6 +107,17 @@ namespace asap {
     when.tm_sec += *d;
     mktime(&when);
     return *this;
+  }
+
+  asap::seconds datetime::operator-(const datetime & other) const {
+    const std::tm & a = when, b = other.when;
+    uint64_t r = (a.tm_year - b.tm_year) * SECONDS_IN_YEAR +
+                 (a.tm_mon  - b.tm_mon) * SECONDS_IN_MONTH +
+                 (a.tm_mday - b.tm_mday) * SECONDS_IN_DAY +
+                 (a.tm_hour - b.tm_hour) * SECONDS_IN_HOUR +
+                 (a.tm_min  - b.tm_min) * SECONDS_IN_MINUTE +
+                 (a.tm_sec  - b.tm_sec);
+    return asap::seconds(r);
   }
 
   datetime & datetime::operator+=(const minutes & d) {
