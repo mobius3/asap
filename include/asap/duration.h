@@ -28,13 +28,13 @@ namespace asap {
         duration<convert> & operator=(int v) { value = v; return *this; }
         double operator*() const { return value; };
 
-        template<int other>
+        template<uint64_t other>
         explicit operator duration<other>() const {
             double asseconds = value * convert;
             return duration<other>(asseconds / other);
         }
 
-        template<int convert2>
+        template<uint64_t convert2>
         duration<convert> & operator+=(const duration<convert2> & other) {
             value = ((value * convert) + (*other * convert2)) / convert;
             return *this;
@@ -45,13 +45,13 @@ namespace asap {
           return *this;
         }
 
-        template<int convert2>
+        template<uint64_t convert2>
         duration<convert> & operator-=(const duration<convert2> & other) {
             value = ((value * convert) - (*other * convert2)) / convert;
             return *this;
         }
 
-        template<int convert2>
+        template<uint64_t convert2>
         duration<convert> & operator=(const duration<convert2> & other) {
             value = (*other * convert2) / convert;
             return *this;
