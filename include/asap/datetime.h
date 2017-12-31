@@ -26,12 +26,12 @@ namespace asap {
       asap::seconds operator-(const datetime & other) const;
 
       template<int convert>
-      datetime & operator-=(const duration<convert> & c) {
+      asap::datetime & operator-=(const asap::duration<convert> & c) {
         return *this += -c;
       }
 
-      datetime & operator+=(time_t stamp);
-      datetime & operator-=(time_t stamp);
+      asap::datetime & operator+=(time_t stamp);
+      asap::datetime & operator-=(time_t stamp);
 
       time_t timestamp() const;
       std::string str(const std::string & fmt = "%x %X") const;
@@ -42,12 +42,12 @@ namespace asap {
   };
 
 
-  inline datetime::datetime(time_t time) noexcept : when{} {
+  inline asap::datetime::datetime(time_t time) noexcept : when{} {
     when = *(std::localtime(&time));
   }
 
-  inline datetime::datetime(const std::string & datetime, const std::string & format, const std::string & locale) : when{} {
-    static std::array<std::string, 8> fmts = {
+  inline asap::datetime::datetime(const std::string & datetime, const std::string & format, const std::string & locale) : when{} {
+    static std::array<std::string, 7> fmts = {
       format,
       "%x %X",
       "%Y-%m-%dT%H:%M:%S",
@@ -66,35 +66,35 @@ namespace asap {
     }
   }
 
-  inline time_t datetime::timestamp() const {
+  inline time_t asap::datetime::timestamp() const {
     std::tm temp = when;
     return mktime(&temp);
   }
 
-  inline std::string datetime::str(const std::string & fmt) const {
+  inline std::string asap::datetime::str(const std::string & fmt) const {
     char data[256];
     std::strftime(data, sizeof(data), fmt.c_str(), &when);
     return std::string(data);
   }
 
-  datetime & datetime::operator+=(time_t stamp) {
+  asap::datetime & asap::datetime::operator+=(time_t stamp) {
     add(static_cast<long>(stamp));
     return *this;
   }
 
-  datetime & datetime::operator-=(time_t stamp) {
+  asap::datetime & asap::datetime::operator-=(time_t stamp) {
     add(-static_cast<long>(stamp));
     return *this;
   }
 
-  void datetime::add(long seconds) {
+  void asap::datetime::add(long seconds) {
     std::time_t time = std::mktime(&when);
     time += seconds;
     when = *(std::localtime(&time));
   }
 
-  datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours, uint32_t minutes, uint32_t seconds)
-    : datetime() {
+  asap::datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours, uint32_t minutes, uint32_t seconds)
+      : datetime() {
     when.tm_year = year - 1900;
     when.tm_mon = month;
     when.tm_mday = day;
@@ -103,7 +103,7 @@ namespace asap {
     when.tm_sec = seconds;
   }
 
-  datetime & datetime::operator+=(const seconds & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::seconds & d) {
     when.tm_sec += *d;
     mktime(&when);
     return *this;
@@ -120,31 +120,31 @@ namespace asap {
     return asap::seconds(r);
   }
 
-  datetime & datetime::operator+=(const minutes & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::minutes & d) {
     when.tm_min += *d;
     return *this += asap::seconds((*d - std::floor(*d)) * SECONDS_IN_MINUTE);
   }
 
-  datetime & datetime::operator+=(const hours & d) {
+  asap::datetime & asap::datetime::operator+=(const hours & d) {
     when.tm_hour += *d;
     return *this += asap::minutes((*d - std::floor(*d)) * (SECONDS_IN_HOUR / SECONDS_IN_MINUTE));
   }
 
-  datetime & datetime::operator+=(const days & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::days & d) {
     when.tm_mday += *d;
     return *this += asap::hours((*d - std::floor(*d)) * (SECONDS_IN_DAY / SECONDS_IN_HOUR));
   }
 
-  datetime & datetime::operator+=(const weeks & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::weeks & d) {
     return *this += asap::days(*d * 7);
   }
 
-  datetime & datetime::operator+=(const months & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::months & d) {
     when.tm_mon += *d;
     return *this += asap::days((*d - std::floor(*d)) * (SECONDS_IN_MONTH / SECONDS_IN_DAY));
   }
 
-  datetime & datetime::operator+=(const years & d) {
+  asap::datetime & asap::datetime::operator+=(const asap::years & d) {
     when.tm_year += *d;
     return *this += asap::months((*d - std::floor(*d)) * (SECONDS_IN_YEAR / SECONDS_IN_MONTH));
   }
