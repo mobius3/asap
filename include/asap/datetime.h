@@ -26,9 +26,7 @@ namespace asap {
       asap::seconds operator-(const datetime & other) const;
 
       template<int convert>
-      asap::datetime & operator-=(const asap::duration<convert> & c) {
-        return *this += -c;
-      }
+      asap::datetime & operator-=(const asap::duration<convert> & c);
 
       asap::datetime & operator+=(time_t stamp);
       asap::datetime & operator-=(time_t stamp);
@@ -147,6 +145,11 @@ namespace asap {
   asap::datetime & asap::datetime::operator+=(const asap::years & d) {
     when.tm_year += *d;
     return *this += asap::months((*d - std::floor(*d)) * (SECONDS_IN_YEAR / SECONDS_IN_MONTH));
+  }
+
+  template<int convert>
+  asap::datetime & asap::datetime::operator-=(const asap::duration<convert> & c) {
+    return *this += -c;
   }
 }
 

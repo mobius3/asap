@@ -27,6 +27,7 @@ namespace asap {
         explicit operator double() const { return value; }
         duration<convert> & operator=(int v) { value = v; return *this; }
         double operator*() const { return value; };
+        duration<convert> operator-() { return duration<convert>(-value); }
 
         template<uint64_t other>
         explicit operator duration<other>() const {
