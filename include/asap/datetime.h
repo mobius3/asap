@@ -26,12 +26,13 @@ namespace asap {
       datetime & operator+=(const months & d);
       datetime & operator+=(const years & d);
       asap::seconds operator-(const datetime & other) const;
-
-      template<int convert>
-      asap::datetime & operator-=(const asap::duration<convert> & c);
-
+      template<int convert> asap::datetime & operator-=(const asap::duration<convert> & c);
       asap::datetime & operator+=(time_t stamp);
       asap::datetime & operator-=(time_t stamp);
+
+      time_t timestamp() const;
+      std::string str(const std::string & fmt = "%x %X") const;
+      asap::period until(const asap::datetime & dt) const;
 
       int second() const;
       asap::datetime & second(int value);
@@ -57,10 +58,6 @@ namespace asap {
       int year();
       asap::datetime & year(int value);
 
-      time_t timestamp() const;
-      std::string str(const std::string & fmt = "%x %X") const;
-
-      asap::period until(const asap::datetime & dt) const;
     private:
       void add(long seconds);
       std::tm when;
