@@ -6,27 +6,27 @@
 
 namespace asap {
   template<uint64_t convert>
-  inline static datetime operator+(const datetime & a, const duration<convert> & b) {
-    datetime r = a;
+  inline static asap::datetime operator+(const asap::datetime & a, const duration<convert> & b) {
+    asap::datetime r = a;
     r += b;
     return r;
   }
 
   template<uint64_t convert>
-  inline static datetime operator-(const datetime & a, const duration<convert> & b) {
-    datetime r = a;
+  inline static asap::datetime operator-(const asap::datetime & a, const duration<convert> & b) {
+    asap::datetime r = a;
     r -= b;
     return r;
   }
 
-  inline static datetime operator+(const datetime & a, std::time_t b) {
-    datetime r = a;
+  inline static asap::datetime operator+(const asap::datetime & a, std::time_t b) {
+    asap::datetime r = a;
     r += b;
     return r;
   }
 
-  inline static datetime operator-(const datetime & a, std::time_t b) {
-    datetime r = a;
+  inline static asap::datetime operator-(const asap::datetime & a, std::time_t b) {
+    asap::datetime r = a;
     r -= b;
     return r;
   }
@@ -60,20 +60,20 @@ namespace asap {
     return r;
   };
 
-  inline static bool operator<(const datetime & a, const datetime & b) {
+  inline static bool operator<(const asap::datetime & a, const asap::datetime & b) {
     return a.timestamp() < b.timestamp();
   }
 
-  inline static bool operator>(const datetime & a, const datetime & b) {
+  inline static bool operator>(const asap::datetime & a, const asap::datetime & b) {
     return a.timestamp() > b.timestamp();
   }
 
-  inline static bool operator==(const datetime & a, const datetime & b) {
+  inline static bool operator==(const asap::datetime & a, const asap::datetime & b) {
     return a.timestamp() == b.timestamp();
   }
 
   template<typename ostream>
-  inline static ostream & operator<<(ostream & os, const datetime & dt) {
+  inline static ostream & operator<<(ostream & os, const asap::datetime & dt) {
     return os << dt.str(), os;
   }
 
