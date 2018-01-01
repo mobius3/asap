@@ -112,7 +112,7 @@ namespace asap {
     return *this += asap::months((*d - std::floor(*d)) * (SECONDS_IN_YEAR / SECONDS_IN_MONTH));
   }
 
-  template<int convert>
+  template<uint64_t convert>
   inline asap::datetime & asap::datetime::operator-=(const asap::duration<convert> & c) {
     return *this += -c;
   }

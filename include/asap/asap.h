@@ -8,6 +8,24 @@
 
 namespace asap {
   static inline asap::datetime now() { return datetime{}; }
+
+  static inline asap::datetime tomorrow() {
+    auto n = asap::now();
+    n += asap::days(1);
+    n.hour(0);
+    n.minute(0);
+    n.second(0);
+    return n;
+  }
+
+  static inline asap::datetime yesterday() {
+      auto n = asap::now();
+      n -= asap::days(1);
+      n.hour(0);
+      n.minute(0);
+      n.second(0);
+      return n;
+  }
 }
 
 #include "datetime.tcc"

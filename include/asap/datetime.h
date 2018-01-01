@@ -26,7 +26,7 @@ namespace asap {
       datetime & operator+=(const months & d);
       datetime & operator+=(const years & d);
       asap::seconds operator-(const datetime & other) const;
-      template<int convert> asap::datetime & operator-=(const asap::duration<convert> & c);
+      template<uint64_t convert> asap::datetime & operator-=(const asap::duration<convert> & c);
       asap::datetime & operator+=(time_t stamp);
       asap::datetime & operator-=(time_t stamp);
 

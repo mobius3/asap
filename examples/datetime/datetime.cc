@@ -26,6 +26,9 @@ int main(int argc, char * argv[]) {
   std::cout << "d2: " << d2.str("%c") << std::endl;
   std::cout << "d3: " << d3.str("date: %d/%m/%Y time: %H:%M") << std::endl;
   std::cout << "d4: " << d4.str("%FT%T%z") << std::endl;
+  std::cout << "now: " << asap::now() << std::endl;
+  std::cout << "tomorrow: " << asap::tomorrow() << std::endl;
+  std::cout << "yesterday: " << asap::yesterday() << std::endl;
 
   return 0;
 }
