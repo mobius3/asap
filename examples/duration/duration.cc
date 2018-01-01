@@ -29,4 +29,6 @@ int main(int argc, char * argv[]) {
   /* be aware that for printing and arithmethics, a month has 30 days, thus half an year
    * is actually 6 months, 2 days and 12 hours. asap::years(0.5) != asap::months(6) */
   std::cout << "half_year = " << half_year << std::endl;
+
+  return 0;
 }
