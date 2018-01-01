@@ -18,51 +18,33 @@ namespace asap {
   }
 
 
-  template <uint64_t convert>
-  duration<convert>::duration(double v)
-      : value(v) { }
+  template <uint64_t convert> inline duration<convert>::duration(double v) : value(v) { }
+  template <uint64_t convert> inline duration<convert>::operator double() const { return value; }
+  template <uint64_t convert> inline duration<convert> & duration<convert>::operator=(int v) { value = v; return *this; }
+  template <uint64_t convert> inline double duration<convert>::operator*() const { return value; }
+  template <uint64_t convert> inline duration<convert> duration<convert>::operator-() { return duration<convert>(-value); }
 
-  template <uint64_t convert>
-  duration<convert>::operator double() const { return value; }
-
-  template <uint64_t convert>
-  duration<convert> & duration<convert>::operator=(int v) { value = v; return *this; }
-
-  template <uint64_t convert>
-  double duration<convert>::operator*() const { return value; }
-
-  template <uint64_t convert>
-  duration<convert> duration<convert>::operator-() { return duration<convert>(-value); }
-
-  template <uint64_t convert>
-  template <uint64_t other>
-  duration<convert>::operator duration<other>() const {
+  template <uint64_t convert> template <uint64_t other> inline duration<convert>::operator duration<other>() const {
     double asseconds = value * convert;
     return duration<other>(asseconds / other);
   }
 
-  template <uint64_t convert>
-  duration<convert> & duration<convert>::operator+=(const duration<convert> & other) {
+  template <uint64_t convert> inline duration<convert> & duration<convert>::operator+=(const duration<convert> & other) {
     value = (value + *other);
     return *this;
   }
 
-  template <uint64_t convert>
-  template <uint64_t convert2>
-  duration<convert> & duration<convert>::operator-=(const duration<convert2> & other) {
+  template <uint64_t convert> template <uint64_t convert2> inline duration<convert> & duration<convert>::operator-=(const duration<convert2> & other) {
     value = ((value * convert) - (*other * convert2)) / convert;
     return *this;
   }
 
-  template <uint64_t convert>
-  template <uint64_t convert2>
-  duration<convert> & duration<convert>::operator=(const duration<convert2> & other) {
+  template <uint64_t convert> template <uint64_t convert2> inline duration<convert> & duration<convert>::operator=(const duration<convert2> & other) {
     value = (*other * convert2) / convert;
     return *this;
   }
 
-  template <uint64_t convert>
-  std::string duration<convert>::str() const {
+  template <uint64_t convert> inline std::string duration<convert>::str() const {
     auto seconds = static_cast<int>(std::fabs(value) * convert);
     std::string str;
     if (value < 0) str = "-";
@@ -80,9 +62,7 @@ namespace asap {
     return str;
   }
 
-  template <uint64_t convert>
-  template <uint64_t convert2>
-  duration<convert> & duration<convert>::operator+=(const duration<convert2> & other) {
+  template <uint64_t convert> template <uint64_t convert2> inline duration<convert> & duration<convert>::operator+=(const duration<convert2> & other) {
     value = ((value * convert) + (*other * convert2)) / convert;
     return *this;
   }
