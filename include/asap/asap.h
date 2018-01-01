@@ -10,7 +10,8 @@ namespace asap {
   static inline asap::datetime now() { return datetime{}; }
 }
 
-#include "datetime.tcc"1
+#include "datetime.tcc"
 #include "duration.tcc"
+#include "period.tcc"
 
 #endif //ASAP_H
