@@ -10,6 +10,8 @@
 #include "duration.h"
 
 namespace asap {
+  class period;
+
   class datetime {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
@@ -58,6 +60,7 @@ namespace asap {
       time_t timestamp() const;
       std::string str(const std::string & fmt = "%x %X") const;
 
+      asap::period until(const asap::datetime & dt) const;
     private:
       void add(long seconds);
       std::tm when;

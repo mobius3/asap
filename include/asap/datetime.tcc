@@ -2,6 +2,7 @@
 #define ASAP_DATETIME_TCC
 
 #include "datetime.h"
+#include "period.h"
 
 namespace asap {
   inline asap::datetime::datetime(time_t time) noexcept : when{} {
@@ -132,6 +133,10 @@ namespace asap {
   inline asap::datetime & datetime::month(int value) { when.tm_mon = value; std::mktime(&when); return *this; }
   inline int datetime::year() { return when.tm_year + 1900; }
   inline asap::datetime & datetime::year(int value) { when.tm_year = value - 1900; std::mktime(&when); return *this; }
+
+  asap::period datetime::until(const asap::datetime & dt) const {
+    return asap::period(*this, dt);
+  }
 }
 
 #endif //ASAP_DATETIME_TCC
