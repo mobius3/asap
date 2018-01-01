@@ -8,6 +8,7 @@
 #include <cmath>
 
 #include "duration.h"
+#include "period.h"
 
 namespace asap {
   class datetime {
@@ -16,6 +17,7 @@ namespace asap {
       explicit datetime(const std::string & datetime, const std::string & format = "%x %X", const std::string & locale = "");
       datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours = 0, uint32_t minutes = 0, uint32_t seconds = 0);
 
+      asap::period until(const asap::datetime & then) const;
       datetime & operator+=(const seconds & d);
       datetime & operator+=(const minutes & d);
       datetime & operator+=(const hours & d);
@@ -150,6 +152,10 @@ namespace asap {
   template<int convert>
   asap::datetime & asap::datetime::operator-=(const asap::duration<convert> & c) {
     return *this += -c;
+  }
+
+  asap::period datetime::until(const asap::datetime & then) const {
+    return period(*this, then);
   }
 }
 
