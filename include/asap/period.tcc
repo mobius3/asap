@@ -18,6 +18,14 @@ namespace asap {
   }
 
   template <uint64_t stepconv>
+  inline asap::datetime detail::accessor<stepconv>::iterator::operator++(int) {
+    datetime prev = now;
+    now += step;
+    if (now > end) now = end;
+    return prev;
+  }
+
+  template <uint64_t stepconv>
   inline const asap::datetime & detail::accessor<stepconv>::iterator::operator*() { return now; }
 
   template <uint64_t stepconv>

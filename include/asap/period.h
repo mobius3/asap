@@ -26,6 +26,7 @@ namespace asap {
                     const step_t & step);
 
           const asap::datetime & operator++();
+          asap::datetime operator++(int);
           const asap::datetime & operator*();
           bool operator==(const iterator & other);
           bool operator!=(const iterator & other);
