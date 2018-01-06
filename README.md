@@ -56,4 +56,4 @@ using namespace asap; //if that's your thing
 
 ## Documentation
 
-See [the examples]() folder for docs and examples.
+See [the examples](examples/) folder for docs and examples.
