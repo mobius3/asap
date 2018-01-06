@@ -21,14 +21,14 @@ int main(int argc, char * argv[]) {
   /* subtracting two datetimes yields a duration, in seconds */
   auto another_ten_years = ten_years_from_now - asap::now();
 
-  std::cout << "ten_years = " << ten_years << std::endl;
-  std::cout << "one_year_and_quarter = " << one_year_and_quarter << std::endl;
-  std::cout << "ten_years_from_now = " << ten_years_from_now << std::endl;
-  std::cout << "another_ten_years = " << another_ten_years << std::endl;
+  std::cout << "ten_years            ->   " << ten_years << std::endl;
+  std::cout << "one_year_and_quarter ->   " << one_year_and_quarter << std::endl;
+  std::cout << "ten_years_from_now   ->   " << ten_years_from_now << std::endl;
+  std::cout << "another_ten_years    ->   " << another_ten_years << std::endl;
 
   /* be aware that for printing and arithmethics, a month has 30 days, thus half an year
    * is actually 6 months, 2 days and 12 hours. asap::years(0.5) != asap::months(6) */
-  std::cout << "half_year = " << half_year << std::endl;
+  std::cout << "half_year            ->   " << half_year << std::endl;
 
   return 0;
 }

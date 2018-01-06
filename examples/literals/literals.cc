@@ -19,9 +19,9 @@ int main(int argc, char * argv[]) {
    *
    * these literals can be used to do time arithmetics.
    */
-  std::cout << "next day                    \t-> " << asap::now() + 1_day << std::endl;
-  std::cout << "1_day + 1_hour              \t-> " << 1_day + 1_hour << std::endl;
-  std::cout << "1_day - (1_hour + 1_minute) \t-> " << 1_day - (1_hour + 1_minute) << std::endl;
+  std::cout << "next day                    \t->   " << asap::now() + 1_day << std::endl;
+  std::cout << "1_day + 1_hour              \t->   " << 1_day + 1_hour << std::endl;
+  std::cout << "1_day - (1_hour + 1_minute) \t->   " << 1_day - (1_hour + 1_minute) << std::endl;
 
   return 0;
 }

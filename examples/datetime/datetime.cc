@@ -20,15 +20,15 @@ int main(int argc, char * argv[]) {
   asap::datetime d4(1983, 6, 17);
 
   /* Default printing format is day-month-year hour:minute:second */
-  std::cout << "d1: " << d1 << std::endl;
+  std::cout << "d1          ->   " << d1 << std::endl;
 
   /* You can also pass a format to str(). Consult strftime manual for the available formats. */
-  std::cout << "d2: " << d2.str("%c") << std::endl;
-  std::cout << "d3: " << d3.str("date: %d/%m/%Y time: %H:%M") << std::endl;
-  std::cout << "d4: " << d4.str("%FT%T%z") << std::endl;
-  std::cout << "now: " << asap::now() << std::endl;
-  std::cout << "tomorrow: " << asap::tomorrow() << std::endl;
-  std::cout << "yesterday: " << asap::yesterday() << std::endl;
+  std::cout << "d2          ->   " << d2.str("%c") << std::endl;
+  std::cout << "d3          ->   " << d3.str("date: %d/%m/%Y time: %H:%M") << std::endl;
+  std::cout << "d4          ->   " << d4.str("%FT%T%z") << std::endl;
+  std::cout << "now         ->   " << asap::now() << std::endl;
+  std::cout << "tomorrow    ->   " << asap::tomorrow() << std::endl;
+  std::cout << "yesterday   ->   " << asap::yesterday() << std::endl;
 
   return 0;
 }
