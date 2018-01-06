@@ -13,11 +13,11 @@ int main(int argc, char * argv[]) {
   asap::datetime d2("08/07/1987");
 
   /* You can also pass a format specifier. They're the same used by strftime */
-  asap::datetime d3("08/07/1987 23:45:12");
+  asap::datetime d3("08/07/1987 23:45:12", "%d/%m/%Y %H:%M:%S");
 
   /* A broken down time may be specified, in the order: year, month, day of month, hour, minute, second.
    * Be aware that months start at 0 for January (as most date/time APIs) */
-  asap::datetime d4(1987, 6, 8);
+  asap::datetime d4(1983, 6, 17);
 
   /* Default printing format is day-month-year hour:minute:second */
   std::cout << "d1: " << d1 << std::endl;
