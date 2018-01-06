@@ -40,6 +40,6 @@ You can also obtain the beginning and the end `asap::datetime` from a period usi
 
 ---
 
-> - [Example for `asap::period`]()
-> - [Back to example docs]()
-> - [Back to main docs]()
+> - [Example for `asap::period`](period.cc)
+> - [Back to example docs](../)
+> - [Back to main docs](../../)

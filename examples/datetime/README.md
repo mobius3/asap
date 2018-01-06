@@ -22,6 +22,6 @@ std::cout << asap::now().str("%c") << std::endl;
 
 ---
 
-> - [Example for `asap::datetime`]()
-> - [Back to example docs]()
-> - [Back to main docs]()
+> - [Example for `asap::datetime`](datetime.cc)
+> - [Back to example docs](../)
+> - [Back to main docs](../../)
