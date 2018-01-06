@@ -25,8 +25,8 @@ namespace asap {
     businessday =                   weekday,
     businesstime =                  1 << 8,
     workinghour =                   businesstime,
-    nighttime =                         1 << 9,
-    daytime =                           1 << 10,
+    nighttime =                     1 << 9,
+    daytime =                       1 << 10,
     morning =                       1 << 11,
     afternoon =                     1 << 12,
     convenient =                    1 << 13
