@@ -3,7 +3,6 @@
 ASAP is a library for C++ designed to provide date and time manipulation facilities in the most straightforward way. It strives for an (mostly) intuitive and simple API.
 
 ## Index
-- [Manuals]()
 - [Features]()
 - [Dependencies]()
 - [Usage]()
@@ -52,3 +51,7 @@ including the "asap.h" header:
 
 using namespace asap; //if that's your thing
 ```
+
+## Documentation
+
+See [the examples]() folder for docs and examples.
