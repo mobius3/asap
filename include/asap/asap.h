@@ -31,6 +31,6 @@ namespace asap {
 
 #include "datetime.tcc"
 #include "duration.tcc"
-#include "literals.tcc"
+#include "period.tcc"
 
 #endif //ASAP_H
