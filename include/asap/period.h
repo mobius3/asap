@@ -59,6 +59,9 @@ namespace asap {
       const asap::datetime & to() const;
       void to(const asap::datetime & end);
 
+      template<typename T> T difference() const;
+      asap::seconds difference() const;
+
       template<uint64_t stepconv>
       asap::detail::accessor<stepconv> every(const asap::duration<stepconv> & d) const;
 

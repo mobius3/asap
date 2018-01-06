@@ -78,6 +78,9 @@ namespace asap {
   inline const asap::datetime & period::to() const { return end_; }
 
   inline void period::to(const asap::datetime & end) { end_ = end; }
+
+  asap::seconds period::difference() const { return {end_ - begin_}; }
+  template<typename T> T period::difference() const { return static_cast<T>(difference()); }
 }
 
 #endif //ASAP_PERIOD_TCC
