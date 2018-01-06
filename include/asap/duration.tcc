@@ -62,6 +62,12 @@ namespace asap {
     return str;
   }
 
+  template <uint64_t convert>
+  template <uint64_t convertfrom>
+  duration<convert>::duration(const asap::duration<convertfrom> & other)
+    : value{(*other * convertfrom) / convert}
+  { }
+
   template <uint64_t convert> template <uint64_t convert2> inline duration<convert> & duration<convert>::operator+=(const duration<convert2> & other) {
     value = ((value * convert) + (*other * convert2)) / convert;
     return *this;

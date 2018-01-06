@@ -11,11 +11,12 @@ namespace asap {
     class duration {
       public:
         explicit duration(double v = 0);
+        template<uint64_t convertfrom> duration(const asap::duration<convertfrom> & other);
         explicit operator double() const;
         duration<convert> & operator=(int v);
         double operator*() const;;
         duration<convert> operator-();
-        template<uint64_t other> explicit operator duration<other>() const;
+        template<uint64_t other> operator duration<other>() const;
         template<uint64_t convert2> duration<convert> & operator+=(const duration<convert2> & other);
         duration<convert> & operator+=(const duration<convert> & other);
         template<uint64_t convert2> duration<convert> & operator-=(const duration<convert2> & other);
