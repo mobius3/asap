@@ -2,6 +2,13 @@
 
 ASAP is a library for C++ designed to provide date and time manipulation facilities in the most straightforward way. It strives for an (mostly) intuitive and simple API.
 
+## Index
+- [Manuals]()
+- [Features]()
+- [Dependencies]()
+- [Usage]()
+- [Documentation]()
+
 ## Features
 
 - Date/time construction from `string`s, `time_t` and `struct tm`
@@ -17,13 +24,15 @@ ASAP is a library for C++ designed to provide date and time manipulation facilit
      }
      ```
      prints every sunday between now and next year.
-
+- Literals for seconds, minutes, hours, days, weeks, months and years. Example:
+  - `1_day` constructs an `asap::days(1)`
+    
 ## Dependencies
 
  - ASAP requires a compiler modern enough to support C++11
  - If adding to a CMake project, CMake 3.1.0 is required
 
-## Using
+## Usage
 
  ASAP is a header-only library. It means you should be able to:
 

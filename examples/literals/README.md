@@ -25,3 +25,9 @@ std::cout << asap::now() + asap::days(2) - asap::hours(1) << std::endl;
 // you can write
 std::cout << asap::now() + 2_days - 1_hour << std::endl;
 ```
+
+---
+
+> - [Example for `asap::literals`]()
+> - [Back to example docs]()
+> - [Back to main docs]()

@@ -19,3 +19,9 @@ You can also format it via the `asap::datetime::str` method
 ```cpp
 std::cout << asap::now().str("%c") << std::endl;
 ``` 
+
+---
+
+> - [Example for `asap::datetime`]()
+> - [Back to example docs]()
+> - [Back to main docs]()

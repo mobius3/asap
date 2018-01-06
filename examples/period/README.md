@@ -37,3 +37,9 @@ asap::years diff3 = period.difference(); // as years;
 
 You can also obtain the beginning and the end `asap::datetime` from a period using `from()` and `to()`. You can also use
 `from(datetime)` and `to(datetime)` to set the beginning and the end of a period. Existing iterations won't be affected.
+
+---
+
+> - [Example for `asap::period`]()
+> - [Back to example docs]()
+> - [Back to main docs]()
