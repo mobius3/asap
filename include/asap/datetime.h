@@ -32,26 +32,6 @@
 namespace asap {
   class period;
 
-
-  enum periods {
-    sunday =                        1,
-    monday =                        1 << 1,
-    tuesday =                       1 << 2,
-    wednesday =                     1 << 3,
-    thursday =                      1 << 4,
-    friday =                        1 << 5,
-    saturday =                      1 << 6,
-    weekday =                       1 << 7,
-    businessday =                   weekday,
-    businesstime =                  1 << 8,
-    workinghour =                   businesstime,
-    nighttime =                     1 << 9,
-    daytime =                       1 << 10,
-    morning =                       1 << 11,
-    afternoon =                     1 << 12,
-    convenient =                    1 << 13
-  };
-
   class datetime {
     public:
       explicit datetime(time_t time = std::time(nullptr)) noexcept;
@@ -73,9 +53,6 @@ namespace asap {
       asap::datetime morning();
       asap::datetime afternoon();
       asap::datetime midnight();
-
-      bool is(asap::periods kind);
-      bool any(asap::periods kind);
 
       time_t timestamp() const;
       std::string str(const std::string & fmt = "%x %X") const;

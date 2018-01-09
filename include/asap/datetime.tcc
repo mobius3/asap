@@ -175,48 +175,6 @@ namespace asap {
     r.hour(0); r.minute(0); r.second(0);
     return r;
   }
-
-  inline bool datetime::is(asap::periods kind) {
-    bool result = true;
-
-    if (kind & sunday)                  result = result && (when.tm_wday == 0);
-    if (kind & monday)                  result = result && (when.tm_wday == 1);
-    if (kind & tuesday)                 result = result && (when.tm_wday == 2);
-    if (kind & wednesday)               result = result && (when.tm_wday == 3);
-    if (kind & thursday)                result = result && (when.tm_wday == 4);
-    if (kind & friday)                  result = result && (when.tm_wday == 5);
-    if (kind & saturday)                result = result && (when.tm_wday == 6);
-    if (kind & weekday)                 result = result && (when.tm_wday != 6 && when.tm_wday != 0);
-    if (kind & businesstime)            result = result && is(weekday) && (when.tm_hour >= 8 && when.tm_hour <= 18);
-    if (kind & daytime)                     result = result && (when.tm_hour >= 6 || when.tm_hour <= 18);
-    if (kind & periods::morning)        result = result && (when.tm_hour >= 6 || when.tm_hour <= 12);
-    if (kind & periods::afternoon)      result = result && (when.tm_hour >= 12 || when.tm_hour <= 18);
-    if (kind & nighttime)                   result = result && (when.tm_hour >= 18 || when.tm_hour <= 6);
-    if (kind & convenient)              result = result && (when.tm_hour >= 8 || when.tm_hour <= 20);
-
-    return result;
-  }
-
-  inline bool datetime::any(asap::periods kind) {
-    bool result = false;
-
-    if (kind & sunday)                  result = result || (when.tm_wday == 0);
-    if (kind & monday)                  result = result || (when.tm_wday == 1);
-    if (kind & tuesday)                 result = result || (when.tm_wday == 2);
-    if (kind & wednesday)               result = result || (when.tm_wday == 3);
-    if (kind & thursday)                result = result || (when.tm_wday == 4);
-    if (kind & friday)                  result = result || (when.tm_wday == 5);
-    if (kind & saturday)                result = result || (when.tm_wday == 6);
-    if (kind & weekday)                 result = result || when.tm_wday != 6 && when.tm_wday != 0;
-    if (kind & businesstime)            result = result || is(weekday) && (when.tm_hour >= 8 && when.tm_hour <= 18);
-    if (kind & daytime)                     result = result || (when.tm_hour >= 6 || when.tm_hour <= 18);
-    if (kind & periods::morning)        result = result && (when.tm_hour >= 6 || when.tm_hour <= 12);
-    if (kind & periods::afternoon)      result = result && (when.tm_hour >= 12 || when.tm_hour <= 18);
-    if (kind & nighttime)                   result = result || (when.tm_hour >= 18 || when.tm_hour <= 6);
-    if (kind & convenient)              result = result || (when.tm_hour >= 8 || when.tm_hour <= 20);
-
-    return result;
-  }
 }
 
 #endif //ASAP_DATETIME_TCC
