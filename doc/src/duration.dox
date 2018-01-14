@@ -55,4 +55,48 @@ You can also add or subtract durations from `asap::datetime` objects:
 std::cout << asap::now() << std::endl;                 // -> 06-01-2018 14:35:39
 std::cout << asap::now() + asap::days(1) << std::endl; // -> 07-01-2018 14:35:39
 ```
+
+@typedef asap::seconds
+@brief A duration specified in seconds
+
+@typedef asap::second
+@brief A duration specified in seconds
+
+@typedef asap::minutes
+@brief A duration specified in minutes
+
+@typedef asap::minute
+@brief A duration specified in minutes
+
+
+@typedef asap::hours
+@brief A duration specified in hours
+
+@typedef asap::hour
+@brief A duration specified in hours
+
+
+@typedef asap::days
+@brief A duration specified in days
+
+@typedef asap::day
+@brief A duration specified in days
+
+@typedef asap::weeks (7 days)
+@brief A duration specified in weeks (7 days)
+
+@typedef asap::week (7 days)
+@brief A duration specified in weeks (7 days)
+
+@typedef asap::months (30 days)
+@brief A duration specified in months (30 days)
+
+@typedef asap::month (30 days)
+@brief A duration specified in months (30 days)
+
+@typedef asap::years
+@brief A duration specified in years
+
+@typedef asap::year
+@brief A duration specified in years
 */
