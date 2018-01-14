@@ -52,4 +52,60 @@ One can argue this is the slowest method in the library.
 @param hours Hour of the day
 @param minutes Minutes of the day
 @param seconds Seconds of the day
+
+@fn asap::datetime::operator+=(const seconds & d)
+@brief Adds a duration specified in seconds to a datetime
+@param d The duration specified in seconds
+@return `*this`
+
+@fn asap::datetime::operator+=(const minutes & d)
+@brief Adds a duration specified in minutes to a datetime
+@param d The duration specified in minutes
+@return `*this`
+
+@fn asap::datetime::operator+=(const hours & d)
+@brief Adds a duration specified in hours to a datetime
+@param d The duration specified in hours
+@return `*this`
+
+@fn asap::datetime::operator+=(const days & d)
+@brief Adds a duration specified in days to a datetime
+@param d The duration specified in days
+@return `*this`
+
+@fn asap::datetime::operator+=(const weeks & d)
+@brief Adds a duration specified in weeks to a datetime
+@param d The duration specified in weeks
+@return `*this`
+
+@fn asap::datetime::operator+=(const months & d)
+@brief Adds a duration specified in months to a datetime
+@param d The duration specified in months
+@return `*this`
+
+@fn asap::datetime::operator+=(const years & d)
+@brief Adds a duration specified in years to a datetime
+@param d The duration specified in years
+@return `*this`
+
+@fn asap::datetime::operator+=(time_t stamp)
+@brief Adds a duration specified in seconds since epoch to a datetime
+@param stamp The duration specified in seconds since epoch
+@return `*this`
+
+@fn asap::datetime::operator-=(time_t stamp)
+@brief Subtracts a duration specified in seconds since epoch from a datetime
+@param stamp The duration specified in seconds since epoch
+@return `*this`
+
+@fn asap::datetime::operator-=(const asap::duration<convert> &c)
+@tparam convert The converting factor for the duration (automatically deduced)
+@brief Subtracts a duration from this datetime
+@param c The duration
+@return `*this`
+
+@fn asap::datetime::operator-(const datetime & other) const
+@brief Returns a duration in seconds specifying the difference to another datetime
+@param other The datetime to calculate the difference
+@return an instance of asap::seconds representing the difference to `other`
 */
