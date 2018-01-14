@@ -33,7 +33,7 @@ namespace asap {
         explicit duration(double v = 0);
         template<uint64_t convertfrom> duration(const asap::duration<convertfrom> & other);
         explicit operator double() const;
-        duration<convert> & operator=(int v);
+        duration<convert> & operator=(double v);
         double operator*() const;;
         duration<convert> operator-();
         template<uint64_t other> operator duration<other>() const;

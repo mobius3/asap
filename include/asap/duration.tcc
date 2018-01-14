@@ -40,7 +40,7 @@ namespace asap {
 
   template <uint64_t convert> inline duration<convert>::duration(double v) : value(v) { }
   template <uint64_t convert> inline duration<convert>::operator double() const { return value; }
-  template <uint64_t convert> inline duration<convert> & duration<convert>::operator=(int v) { value = v; return *this; }
+  template <uint64_t convert> inline duration<convert> & duration<convert>::operator=(double v) { value = v; return *this; }
   template <uint64_t convert> inline double duration<convert>::operator*() const { return value; }
   template <uint64_t convert> inline duration<convert> duration<convert>::operator-() { return duration<convert>(-value); }
 
