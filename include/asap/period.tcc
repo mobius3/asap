@@ -24,6 +24,50 @@
 #include "period.h"
 
 namespace asap {
+  namespace detail {
+    template<uint64_t stepconv>
+    class accessor {
+      private:
+        using step_t = asap::duration<stepconv>;
+
+      public:
+        struct iterator {
+          asap::datetime now;
+          asap::datetime begin;
+          asap::datetime end;
+          step_t step;
+
+          iterator(const asap::datetime & now,
+                   const asap::datetime & begin,
+                   const asap::datetime & end,
+                   const step_t & step);
+
+          const asap::datetime & operator++();
+          asap::datetime operator++(int);
+          const asap::datetime & operator*();
+          bool operator==(const iterator & other);
+          bool operator!=(const iterator & other);
+        };
+
+        accessor::iterator begin() const;
+        accessor::iterator end() const;
+
+      private:
+        accessor(const asap::period & range, step_t step);
+
+        const asap::datetime & from() const;
+        const asap::datetime & to() const;
+
+      private:
+        const asap::period & range;
+        step_t step;
+
+        friend class accessor::iterator;
+        friend class asap::period;
+    };
+  }
+
+
   template <uint64_t stepconv>
   inline asap::detail::accessor<stepconv>::iterator::iterator(const asap::datetime & now, const asap::datetime & begin,
                                                        const asap::datetime & end,
