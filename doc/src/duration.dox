@@ -99,4 +99,61 @@ std::cout << asap::now() + asap::days(1) << std::endl; // -> 07-01-2018 14:35:39
 
 @typedef asap::year
 @brief A duration specified in years
+
+@fn asap::duration::duration(double v=0)
+@brief Constructs a duration with the value set to @p v
+@param v Initial value
+
+@fn asap::duration::duration(const asap::duration< convertfrom > &other)
+@tparam convertfrom The other convertion factor
+@param other the other duration to read from
+3@brief Converts the value of @p `other` to construct an `asap::duration`
+
+@fn asap::duration::operator double() const
+@brief Converts an `asap::duration` to `double` in the same 2456convertion factor specified (e.g, `0.5` days, if using asap::days)
+
+@fn asap::duration::operator=(double v)
+@brief Sets the internal value to @p v
+@return `*this`
+@param v The value to set
+
+@fn asap::duration::operator*() const
+@brief the same as @ref asap::duration::operator double()
+@return the same as @ref asap::duration::operator double() would return
+
+@fn asap::duration::operator-()
+@brief Changes the sign of a duration
+@return Another duration with the sign inverted
+
+@fn asap::duration::operator duration< other >() const
+@tparam other The other convertion factor
+@brief Converts an duration to another duration factor (e.g, convert an `asap::day` to an `asap::year`)
+@return Another duration with the same factor as `other`
+
+@fn asap::duration::operator+=(const duration< convert2 > &other)
+@brief Adds another duration to this duration, converting to this convertion factor (e.g, `1_day + 1_week == 1_day + 7_days`)
+@tparam convert2 The convertion factor of @p `other`
+@param other The other duration to add
+@returns `*this`
+
+@fn asap::duration::operator+=(const duration< convert > &other)
+@brief Adds another duration to this duration with the same convertion factor
+@param other The other duration to add
+@returns `*this`
+
+@fn asap::duration::operator-=(const duration< convert2 > &other)
+@brief Subtracts another duration from this duration, converting to this convertion factor (e.g, `1_day -= 1_week == 1_day -= 7_days`)
+@tparam convert2 The convertion factor of @p `other`
+@param other The other duration to subtract
+@returns `*this`
+
+@fn asap::duration::operator=(const duration< convert2 > &other)
+@brief Sets this duration as equals to another duration, converting to this convertion factor (e.g, `asap::days d = 1_week == asap::days d = 7_days`)
+@tparam convert2 The convertion factor of @p `other`
+@param other The other duration to copy
+@returns `*this`
+
+@fn asap::duration::str() const
+@brief Pretty print this duration, breaking down all the units (e.g: `std::cout << 10_days` would print `1 week, 3 days`)
+@returns an instance of `std::string` with an asap::duration prettified in it.
 */
