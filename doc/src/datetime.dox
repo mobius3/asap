@@ -108,4 +108,110 @@ One can argue this is the slowest method in the library.
 @brief Returns a duration in seconds specifying the difference to another datetime
 @param other The datetime to calculate the difference
 @return an instance of asap::seconds representing the difference to `other`
+
+@fn asap::datetime::morning() const
+@brief Creates a new asap::datetime representing the morning of the same day
+@return a new asap::datetime at 6 am in the same day (which usually is considered morning around the world)
+
+@fn asap::datetime::afternoon() const
+@brief Creates a new asap::datetime representing the afternoon of the same day
+@return a new asap::datetime at 12 pm in the same day (which usually is considered afternoon around the world)
+
+@fn asap::datetime::midnight() const
+@brief Creates a new asap::datetime representing the midnight of the same day
+@return a new asap::datetime at 0 am in the same day
+
+@fn asap::datetime::timestamp() const
+@brief Converts an asap::datetime to a `time_t`
+@return the timestamp of this asap::datetime in `time_t`
+
+@fn asap::datetime::str(const std::string &fmt="%x %X") const
+@param fmt The format to use when converting
+@brief Converts to an string using the format specified
+@return A std::string with the resulting conversion
+
+@fn asap::datetime::until(const asap::datetime & dt) const
+@brief Creates an instance of asap::period starting at this datetime and ending at dt
+@param dt Ending datetime
+@return An instance of asap::period
+
+@fn asap::datetime::second() const
+@brief Returns the seconds of a minute specified in this asap::datetime
+@returns seconds of a minute
+
+@fn asap::datetime::second(int value)
+@brief Sets the seconds in a minute specified in this asap::datetime
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::minute() const
+@brief Returns the minutes of an hour specified in this asap::datetime
+@returns minutes of an hour
+
+@fn asap::datetime::minute(int value)
+@brief Sets the minutes in an hour specified in this asap::datetime
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::hour() const
+@brief Returns the hours of a day specified in this asap::datetime
+@returns hours of a day of this asap::datetime
+
+
+@fn asap::datetime::hour(int value)
+@brief Sets the hour of a day specified in this asap::datetime
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::wday() const
+@brief Returns the day of a week specified in this asap::datetime
+@returns day of a week of this asap::datetime
+
+@fn asap::datetime::wday(int value)
+@brief Sets the day of a week specified in this asap::datetime (0-6)
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::mday() const
+@brief Returns the day of a month specified in this asap::datetime
+@returns day of a month of this asap::datetime
+
+@fn asap::datetime::mday(int value)
+@brief Sets the day of a month specified in this asap::datetime (1-31)
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::yday() const
+@brief Returns the day in a year specified in this asap::datetime
+@returns day in a year
+
+@fn asap::datetime::yday(int value)
+@brief Sets the day in a year specified in this asap::datetime (1-365)
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::month() const
+@brief Returns the month in a year specified in this asap::datetime
+@returns month in a year
+
+@fn asap::datetime::month(int value)
+@brief Sets the month in a year specified in this asap::datetime (0-11)
+@param value The value to set
+@returns `*this`
+@details You can overflow this value and it will be converted correctly
+
+@fn asap::datetime::year() const
+@brief Returns the year specified in this asap::datetime
+@returns year of this asap::datetime
+
+@fn asap::datetime::year(int value)
+@param value The value to set
+@brief Sets the year specified in this asap::duration
+@returns `*this`
 */
