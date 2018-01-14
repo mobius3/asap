@@ -101,8 +101,7 @@ FILE_PATTERNS          = *.c \
                          *.inc \
                          *.markdown \
                          *.md \
-                         *.dox \
-                         *.tcc
+                         *.dox
 RECURSIVE              = YES
 EXCLUDE                =
 EXAMPLE_PATH           = @CMAKE_SOURCE_DIR@/examples
