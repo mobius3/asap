@@ -19,5 +19,23 @@ The asap namespace contains all symbols, classes and functions for the ASAP libr
 @brief Creates an @c asap::datetime instance representing the previous day at 00:00:00
 @return an @c asap::datetime instance
 
+@var SECONDS_IN_MINUTE
+@brief Specifies how many seconds there is in a standard minute of 60 seconds
+
+@var SECONDS_IN_HOUR
+@brief Specifies how many seconds there is in a standard hour of 60 minutes
+
+@var SECONDS_IN_DAY
+@brief Specifies how many seconds there is in a standard day of 24 hours
+
+@var SECONDS_IN_MONTH
+@brief Specifies how many seconds there is in a standard month of 30 days
+
+@var SECONDS_IN_YEAR
+@brief Specifies how many seconds there is in a standard year of 365 days
+
+@var SECONDS_IN_WEEK
+@brief Specifies how many seconds there is in a standard week of 7 days
+
 */
 }
