@@ -22,5 +22,34 @@ You can also format it via the `asap::datetime::str` method
 std::cout << asap::now().str("%c") << std::endl;
 ```
 
+@fn asap::datetime::datetime(time_t time=std::time(nullptr)) noexcept
+@brief Constructs a asap::datetime from a `time_t`, defaulting to the current time.
+@param time The time specified as seconds since epoch (`time_t`)
 
+This is also the default asap::datetime constructor
+
+@fn asap::datetime::datetime(const std::string &datetime, const std::string &format="%x %X", const std::string &locale="")
+@brief Constructs a asap::datetime from a string, optionally with a format and a locale
+@param datetime The datetime specified in a string
+@param format The datetime format, defaults to "%x %X" which is equivalent to "%d/%m/%Y %H:%M:%S" on some locales and "%m/%d/%Y %H:%M:%S in en_US locale)
+@param locale The locale to specify when reading the string
+
+This constructor tries its best to read the date and time specified in the string. This is what it tries:
+
+- Read the string in the specified format and locale
+- Convert the datetime back to a string using the same format and locale
+- If the strings are equal, it stops
+- If not it tries the next known format
+- If nothing works, defaults to 0 seconds since epoch.
+
+One can argue this is the slowest method in the library.
+
+@fn asap::datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours=0, uint32_t minutes=0, uint32_t seconds=0)
+@brief Constructs a asap::datetime from a broken down time
+@param year The year
+@param month The 0-based month (e.g, 0 for January)
+@param day The day of the month (**not the day of the year!**)
+@param hours Hour of the day
+@param minutes Minutes of the day
+@param seconds Seconds of the day
 */
