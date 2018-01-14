@@ -141,17 +141,17 @@ namespace asap {
   inline asap::datetime & datetime::second(int value) { when.tm_sec = value; std::mktime(&when); return *this; }
   inline  int datetime::minute() const { return when.tm_min; }
   inline asap::datetime & datetime::minute(int value) { when.tm_min = value; std::mktime(&when); return *this; }
-  inline int datetime::hour() { return when.tm_hour; }
+  inline int datetime::hour() const { return when.tm_hour; }
   inline asap::datetime & datetime::hour(int value) { when.tm_hour = value; std::mktime(&when); return *this; }
-  inline int datetime::wday() { return when.tm_wday; }
+  inline int datetime::wday() const { return when.tm_wday; }
   inline asap::datetime & datetime::wday(int value) { when.tm_wday = value; std::mktime(&when); return *this; }
-  inline int datetime::mday() { return when.tm_mday; }
+  inline int datetime::mday() const { return when.tm_mday; }
   inline asap::datetime & datetime::mday(int value) { when.tm_mday = value; std::mktime(&when); return *this; }
-  inline int datetime::yday() { return when.tm_yday; }
+  inline int datetime::yday() const { return when.tm_yday; }
   inline asap::datetime & datetime::yday(int value) { when.tm_yday = value; std::mktime(&when); return *this; }
-  inline int datetime::month() { return when.tm_mon; }
+  inline int datetime::month() const { return when.tm_mon; }
   inline asap::datetime & datetime::month(int value) { when.tm_mon = value; std::mktime(&when); return *this; }
-  inline int datetime::year() { return when.tm_year + 1900; }
+  inline int datetime::year() const { return when.tm_year + 1900; }
   inline asap::datetime & datetime::year(int value) { when.tm_year = value - 1900; std::mktime(&when); return *this; }
 
   inline asap::period datetime::until(const asap::datetime & dt) const {

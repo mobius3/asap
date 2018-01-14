@@ -64,22 +64,22 @@ namespace asap {
       int minute() const;
       asap::datetime & minute(int value);
 
-      int hour();
+      int hour() const;
       asap::datetime & hour(int value);
 
-      int wday();
+      int wday() const;
       asap::datetime & wday(int value);
 
-      int mday();
+      int mday() const;
       asap::datetime & mday(int value);
 
-      int yday();
+      int yday() const;
       asap::datetime & yday(int value);
 
-      int month();
+      int month() const;
       asap::datetime & month(int value);
 
-      int year();
+      int year() const;
       asap::datetime & year(int value);
 
     private:
