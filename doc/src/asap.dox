@@ -1,0 +1,23 @@
+namespace asap {
+/**
+
+@file asap.h
+This file exposes all of ASAP public classes and functions. You should not need to include anything else.
+
+@namespace asap
+The asap namespace contains all symbols, classes and functions for the ASAP library
+
+@fn asap::now
+@brief Creates an @c asap::datetime instance representing current time
+@return an @c asap::datetime instance
+
+@fn asap::tomorrow
+@brief Creates an @c asap::datetime instance representing the next day at 00:00:00
+@return an @c asap::datetime instance
+
+@fn asap::yesterday
+@brief Creates an @c asap::datetime instance representing the previous day at 00:00:00
+@return an @c asap::datetime instance
+
+*/
+}

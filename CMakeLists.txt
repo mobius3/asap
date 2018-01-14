@@ -58,6 +58,8 @@ if (ASAP_BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
 
+add_subdirectory(doc)
+
 # This library is a convenience library to force files to properly appear in the IDE.
 add_library(asap-dummy
   include/asap/datetime.h

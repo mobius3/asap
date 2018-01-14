@@ -1,0 +1,12 @@
+/**
+@class asap::duration
+@brief The asap::duration class exposes methods to create, manipulate and print durations
+@tparam convert The multiplier in seconds for this duration
+
+A duration is an unbounded period of time. It does not have a start datetime nor an end. Durations are stored as a floating value and can be converted between themselves (e.g, `asap::day(0.5) == asap::hours(12)`). Be aware that some relationships that we are used to might not apply:
+
+```
+// half an year is not equal to 6 months:
+asap::year(0.5) != asap::months(6);
+```
+*/
