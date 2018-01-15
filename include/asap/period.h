@@ -37,7 +37,17 @@ namespace asap {
       const asap::datetime & to() const;
       void to(const asap::datetime & end);
 
+      /**
+       * @brief Calculates the difference between the start and the end
+       * @tparam T the type to return (e.g, `asap::seconds`)
+       * @return An T instance
+       */
       template<typename T> T difference() const;
+
+      /**
+       * @brief Calculates the difference between the start and the end as seconds
+       * @return An asap::seconds instance
+       */
       asap::seconds difference() const;
 
       template<uint64_t stepconv>
