@@ -18,6 +18,13 @@ ASAP is a small, header-only date-time library for C++11 and beyond. It is heavi
    }
 ```
 
+## Index
+
+- asap::datetime class docs to learn about date/time
+- asap::duration class docs will teach you about durations and their literals
+- asap::period class docs to learn about periods and date/time iterations
+- literals.h has the asap::literals namespace with all ASAP literals
+
 ## Using
 
 You can either:
