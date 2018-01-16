@@ -1,59 +1,38 @@
-# ASAP C++ time library
+# The ASAP date/time library for beautiful C++ code
 
-ASAP is a library for C++ designed to provide date and time manipulation facilities in the most straightforward way. It strives for an (mostly) intuitive and simple API.
-
-ASAP is MIT licensed.
-
-## Index
-- [Features](#features)
-- [Dependencies](#dependencies)
-- [Usage](#usage)
-- [Documentation](examples/)
+ASAP is a small, header-only date-time library for C++11 and beyond. It is heavily inspired by my great time using [momentjs](momentjs.com) to parse and display dates. ASAP has a lot of syntatic sugar to make your code look pretty both on the inside and outside :)
 
 ## Features
 
-- Date/time construction from `string`s, `time_t` and `struct tm`
-- Date/time printing and formating
-- Date/time manipulation via `asap::duration` type
-- Duration manipulation (e.g: `asap::days(10) + asap::months(0.5)`)
+- A date/time class to handle dates and time (duh)
+- A duration class to handle unbounded periods (e.g, `asap::day(1)` specifies a day)
+- A period class to handle bounded periods (e.g, `asap::period(asap::now(), asap::tomorrow())`)
+- Lots of syntatic sugar (e.g, `auto then = asap::now() + asap::week(1)`)
+- Literals (e.g, `auto then = asap::now() + 1_year`) for seconds, minutes, hours, days, weeks, months and years
 - Broken down duration printing (e.g, `asap::days(10)` prints `"1 week, 3 days"`)
-- Period creation and iteration:
-     ```cpp
-     asap::datetime x, y = x + asap::years(1);
-     for (auto dt : asap::period(x, y).every(asap::weeks(1)) {
-        std::cout << dt << std::endl;
-     }
-     ```
-     prints every sunday between now and next year.
-- Literals for seconds, minutes, hours, days, weeks, months and years. Example:
-  - `1_day` constructs an `asap::days(1)`
-    
-## Dependencies
-
- - ASAP requires a compiler modern enough to support C++11
- - If adding to a CMake project, CMake 3.1.0 is required
-
-## Usage
-
- ASAP is a header-only library. It means you should be able to:
-
- - Copy and paste the include/asap folder to your project
- - Add the `include/` directory to your project search path
- - Include it as a CMake subdirectory:
-    ```cmake
-    add_subdirectory(third-party/asap)
-    target_link_library(your-executable PRIVATE asap)
-    ```
-
-All types are under the `asap` namespace. You can make them visible by
-including the "asap.h" header:
-
-```cpp
-#include "asap.h"
-
-using namespace asap; //if that's your thing
+- Range-based iteration for periods:
+```
+   for (auto x: asap::now().until(asap::tomorrow()).every(1_hour)) {
+        std::cout << x << std::endl;
+   }
 ```
 
-## Documentation
+## Index
 
-See [the examples](examples/) folder for docs and examples.
+- asap::datetime [class docs](http://mobius3.github.io/asap/api/classasap_1_1datetime.html) to learn about date/time
+- asap::duration [class docs](http://mobius3.github.io/asap/api/classasap_1_1duration.html) will teach you about durations and their literals
+- asap::period [class docs](http://mobius3.github.io/asap/api/classasap_1_1period.html) to learn about periods and date/time iterations
+- literals.h [docs](http://mobius3.github.io/asap/api/literals_8h_source.html) has the asap::literals namespace with all ASAP literals
+
+## Using
+
+You can either:
+
+- Drop the `include/asap` folder in your project and use it
+- Make your compiler aware of the `include/asap` folder and include `"asap.h"` in your code
+- If using CMake you can add the project subdirectory and link against it using `target_link_libraries`
+- Use `find_package` if you installed ASAP using `make install` or any other method
+
+## License
+
+ASAP is MIT licensed.
