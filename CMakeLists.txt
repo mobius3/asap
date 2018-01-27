@@ -73,3 +73,10 @@ add_library(asap-dummy
   include/asap/duration.tcc
   include/asap/period.tcc)
 set_target_properties(asap-dummy PROPERTIES LINKER_LANGUAGE CXX EXCLUDE_FROM_ALL TRUE)
+
+add_custom_target(dist
+  ${CMAKE_COMMAND}
+    "-DBIN_DIR='${CMAKE_BINARY_DIR}'"
+    "-DSRC_DIR=${CMAKE_SOURCE_DIR}"
+    "-P" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/build-single-header.cmake"
+)

@@ -27,6 +27,7 @@
 #include <sstream>
 #include <cmath>
 #include <type_traits>
+#include <cstdint>
 
 #include "datetime.h"
 #include "duration.h"

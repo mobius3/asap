@@ -21,8 +21,6 @@
 #ifndef ASAP_CONSTANTS_H
 #define ASAP_CONSTANTS_H
 
-#include <cstdint>
-
 namespace asap {
   static constexpr uint64_t SECONDS_IN_MINUTE = 60;
   static constexpr uint64_t SECONDS_IN_HOUR = SECONDS_IN_MINUTE * 60;
