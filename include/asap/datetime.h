@@ -21,12 +21,6 @@
 #ifndef ASAP_DATETIME_H
 #define ASAP_DATETIME_H
 
-#include <ctime>
-#include <string>
-#include <iomanip>
-#include <sstream>
-#include <cmath>
-
 #include "duration.h"
 
 namespace asap {

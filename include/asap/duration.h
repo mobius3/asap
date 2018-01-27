@@ -21,9 +21,6 @@
 #ifndef ASAP_DURATION_H
 #define ASAP_DURATION_H
 
-#include <string>
-#include <type_traits>
-#include <cmath>
 #include "constants.h"
 
 namespace asap {

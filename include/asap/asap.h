@@ -21,6 +21,13 @@
 #ifndef ASAP_H
 #define ASAP_H
 
+#include <ctime>
+#include <string>
+#include <iomanip>
+#include <sstream>
+#include <cmath>
+#include <type_traits>
+
 #include "datetime.h"
 #include "duration.h"
 #include "period.h"
