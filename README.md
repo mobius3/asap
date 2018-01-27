@@ -32,6 +32,7 @@ You can either:
 - Make your compiler aware of the `include/asap` folder and include `"asap.h"` in your code
 - If using CMake you can add the project subdirectory and link against it using `target_link_libraries`
 - Use `find_package` if you installed ASAP using `make install` or any other method
+- Download the latest release which is a single `asap.h` file bundled with all the classes.
 
 ## License
 
