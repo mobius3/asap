@@ -2,6 +2,8 @@
 
 ASAP is a small, header-only date-time library for C++11 and beyond. It is heavily inspired by my great time using [momentjs](momentjs.com) to parse and display dates. ASAP has a lot of syntatic sugar to make your code look pretty both on the inside and outside :)
 
+All ASAP examples available [online at _repl.it_](https://repl.it/@mobius3/asapexamples). (`main()` starts at line `551`)
+
 ## Features
 
 - A date/time class to handle dates and time (duh)
