@@ -31,3 +31,5 @@ execute_process(
       "/^\\s*$/d"
    OUTPUT_FILE ${BIN_DIR}/dist/asap.h
 )
+
+message(STATUS "${BIN_DIR}/dist/asap.h ready")
