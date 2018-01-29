@@ -1,0 +1,5 @@
+site_name: ASAP
+pages:
+  - Home: index.md
+  - Download: download.md
+  - Examples: examples.md
