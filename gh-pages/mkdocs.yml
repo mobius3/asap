@@ -1,5 +1,10 @@
 site_name: ASAP
+site_url: https://mobius3.github.io/asap/
+repo_url: https://github.com/mobius3/asap/
+repo_name: GitHub
+site_description: Site for the ASAP C++ library
 pages:
   - Home: index.md
-  - Download: download.md
-  - Examples: examples.md
+theme:
+  name: mkdocs
+  custom_dir: theme/
