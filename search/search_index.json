@@ -1,0 +1,19 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "The ASAP date/time library\n\n\nASAP is a small, header-only date-time library for C++11 and beyond. It is heavily inspired by my great time using \nmomentjs\n to parse and display dates. ASAP has a lot of syntatic sugar to make your code look pretty both on the inside and outside :)\n\n\nFeatures\n\n\n\n\nA date/time class to handle dates and time (duh)\n\n\nA duration class to handle unbounded periods (e.g, \nasap::day(1)\n specifies a day)\n\n\nA period class to handle bounded periods (e.g, \nasap::period(asap::now(), asap::tomorrow())\n)\n\n\nLots of syntatic sugar (e.g, \nauto then = asap::now() + asap::week(1)\n)\n\n\nLiterals (e.g, \nauto then = asap::now() + 1_year\n) for seconds, minutes, hours, days, weeks, months and years\n\n\nBroken down duration printing (e.g, \nasap::days(10)\n prints \n\"1 week, 3 days\"\n)\n\n\nRange-based iteration for periods:\n\n\n\n\n   for (auto x: asap::now().until(asap::tomorrow()).every(1_hour)) {\n        std::cout << x << std::endl;\n   }",
+            "title": "Home"
+        },
+        {
+            "location": "/#the-asap-datetime-library",
+            "text": "ASAP is a small, header-only date-time library for C++11 and beyond. It is heavily inspired by my great time using  momentjs  to parse and display dates. ASAP has a lot of syntatic sugar to make your code look pretty both on the inside and outside :)",
+            "title": "The ASAP date/time library"
+        },
+        {
+            "location": "/#features",
+            "text": "A date/time class to handle dates and time (duh)  A duration class to handle unbounded periods (e.g,  asap::day(1)  specifies a day)  A period class to handle bounded periods (e.g,  asap::period(asap::now(), asap::tomorrow()) )  Lots of syntatic sugar (e.g,  auto then = asap::now() + asap::week(1) )  Literals (e.g,  auto then = asap::now() + 1_year ) for seconds, minutes, hours, days, weeks, months and years  Broken down duration printing (e.g,  asap::days(10)  prints  \"1 week, 3 days\" )  Range-based iteration for periods:      for (auto x: asap::now().until(asap::tomorrow()).every(1_hour)) {\n        std::cout << x << std::endl;\n   }",
+            "title": "Features"
+        }
+    ]
+}
