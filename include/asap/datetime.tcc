@@ -21,6 +21,8 @@
 #ifndef ASAP_DATETIME_TCC
 #define ASAP_DATETIME_TCC
 
+#include <array>
+
 #include "datetime.h"
 #include "period.h"
 
