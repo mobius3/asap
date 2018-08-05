@@ -62,7 +62,7 @@ namespace asap {
         const asap::period & range;
         step_t step;
 
-        friend class accessor::iterator;
+        friend struct accessor::iterator;
         friend class asap::period;
     };
   }
