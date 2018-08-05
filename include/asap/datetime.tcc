@@ -28,7 +28,12 @@
 
 namespace asap {
   inline asap::datetime::datetime(time_t time) noexcept : when{} {
+#ifdef _WIN32
+    localtime_s(&when, &time);
+#else
+    //TODO localtime_r
     when = *(std::localtime(&time));
+#endif
   }
 
   inline asap::datetime::datetime(const std::string & datetime, const std::string & format, const std::string & locale) : when{} {
@@ -75,7 +80,12 @@ namespace asap {
   inline void asap::datetime::add(long seconds) {
     std::time_t time = std::mktime(&when);
     time += seconds;
+#ifdef _WIN32
+    localtime_s(&when, &time);
+#else
+    //TODO localtime_r
     when = *(std::localtime(&time));
+#endif
   }
 
   inline asap::datetime::datetime(uint32_t year, uint32_t month, uint32_t day, uint32_t hours, uint32_t minutes, uint32_t seconds)
@@ -89,7 +99,7 @@ namespace asap {
   }
 
   inline asap::datetime & asap::datetime::operator+=(const asap::seconds & d) {
-    when.tm_sec += *d;
+    when.tm_sec += static_cast<int>(*d);
     mktime(&when);
     return *this;
   }
@@ -102,21 +112,21 @@ namespace asap {
                  (a.tm_hour - b.tm_hour) * SECONDS_IN_HOUR +
                  (a.tm_min  - b.tm_min) * SECONDS_IN_MINUTE +
                  (a.tm_sec  - b.tm_sec);
-    return asap::seconds(r);
+    return asap::seconds(static_cast<double>(r));
   }
 
   inline asap::datetime & asap::datetime::operator+=(const asap::minutes & d) {
-    when.tm_min += *d;
+    when.tm_min += static_cast<int>(*d);
     return *this += asap::seconds((*d - std::floor(*d)) * SECONDS_IN_MINUTE);
   }
 
   inline asap::datetime & asap::datetime::operator+=(const hours & d) {
-    when.tm_hour += *d;
+    when.tm_hour += static_cast<int>(*d);
     return *this += asap::minutes((*d - std::floor(*d)) * (SECONDS_IN_HOUR / SECONDS_IN_MINUTE));
   }
 
   inline asap::datetime & asap::datetime::operator+=(const asap::days & d) {
-    when.tm_mday += *d;
+    when.tm_mday += static_cast<int>(*d);
     return *this += asap::hours((*d - std::floor(*d)) * (SECONDS_IN_DAY / SECONDS_IN_HOUR));
   }
 
@@ -125,12 +135,12 @@ namespace asap {
   }
 
   inline asap::datetime & asap::datetime::operator+=(const asap::months & d) {
-    when.tm_mon += *d;
+    when.tm_mon += static_cast<int>(*d);
     return *this += asap::days((*d - std::floor(*d)) * (SECONDS_IN_MONTH / SECONDS_IN_DAY));
   }
 
   inline asap::datetime & asap::datetime::operator+=(const asap::years & d) {
-    when.tm_year += *d;
+    when.tm_year += static_cast<int>(*d);
     return *this += asap::months((*d - std::floor(*d)) * (SECONDS_IN_YEAR / SECONDS_IN_MONTH));
   }
 
