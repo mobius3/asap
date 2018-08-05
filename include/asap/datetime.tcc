@@ -31,8 +31,7 @@ namespace asap {
 #ifdef _WIN32
     localtime_s(&when, &time);
 #else
-    //TODO localtime_r
-    when = *(std::localtime(&time));
+    localtime_r(&time, &when);
 #endif
   }
 
@@ -83,8 +82,7 @@ namespace asap {
 #ifdef _WIN32
     localtime_s(&when, &time);
 #else
-    //TODO localtime_r
-    when = *(std::localtime(&time));
+    localtime_r(&time, &when);
 #endif
   }
 
