@@ -51,9 +51,7 @@ namespace asap {
       std::stringstream ss(datetime);
       ss.imbue(std::locale(""));
       ss >> std::get_time(&when, fmt.c_str());
-      if (ss.fail()) {
-		    continue;
-	    }
+      if (ss.fail()) continue;
       if (str(fmt) == datetime) break;
     }
   }
